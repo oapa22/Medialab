@@ -1,6 +1,7 @@
 # RadioUtpl
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.0.4.
+Node version v20.13.1
+Angular version 18.2.1
 
 ## Development server
 
