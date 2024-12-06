@@ -1,6 +1,6 @@
 # RadioUtpl
 
-Node version v20.13.1
+Node version 20.13.1
 
 Angular version 18.2.1
 
