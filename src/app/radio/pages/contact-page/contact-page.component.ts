@@ -6,6 +6,7 @@ import { AuthServiceService } from '../../../auth/services/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import emailjs, { type EmailJSResponseStatus } from '@emailjs/browser';
 import { ResquestLoaderRenderService } from '../../../shared/renders/resquest-loader.service';
+import { Timestamp } from '@angular/fire/firestore';
 
 
 @Component({
@@ -24,6 +25,7 @@ export class ContactPageComponent implements OnInit{
     password: '',
     isAdmin: false,
     likedProjects: [],
+    date: Timestamp.now(),
   }
   form: FormGroup = this.fb.group({
     from_name: '',
@@ -79,7 +81,8 @@ export class ContactPageComponent implements OnInit{
         email: res!.email,
         password: '',
         isAdmin: res!.isAdmin,
-        likedProjects: res!.likedProjects
+        likedProjects: res!.likedProjects,
+        date: res!.date
       };
     });
   }
