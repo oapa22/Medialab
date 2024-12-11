@@ -41,7 +41,7 @@ export class LayoutPageComponent implements OnInit {
         return data.titleRoute;
       }
     }
-    return 'Indefindo';
+    return 'Administrador';
   }
 
 }

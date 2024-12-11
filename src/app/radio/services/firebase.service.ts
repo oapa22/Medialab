@@ -122,7 +122,7 @@ export class FirestoreService {
     ): Promise<QuerySnapshot<tipo>> {
       // Convertimos el Observable a una Promise para usarlo con async/await
       const observable: Observable<QuerySnapshot<tipo>> = this.firestore.collection<tipo>(path, ref =>
-        ref.orderBy('date').startAfter(lastVisible).limit(numbersDocShow)
+        ref.orderBy('date','desc').startAfter(lastVisible).limit(numbersDocShow)
       ).get();
 
       return firstValueFrom(observable); // Devuelve una Promise
@@ -135,7 +135,7 @@ export class FirestoreService {
     ): Promise<QuerySnapshot<tipo>> {
       // Convertimos el Observable a una Promise para usarlo con async/await
       const observable: Observable<QuerySnapshot<tipo>> = this.firestore.collection<tipo>(path, ref =>
-        ref.orderBy('date').endBefore(lastVisible).limitToLast(numbersDocShow)
+        ref.orderBy('date','desc').endBefore(lastVisible).limitToLast(numbersDocShow)
       ).get();
 
       return firstValueFrom(observable); // Devuelve una Promise
@@ -148,12 +148,12 @@ export class FirestoreService {
 
     public getFirstSnapshot<tipo>(path:string, numbersDocShow:number):Observable<QuerySnapshot<tipo>>{
       return this.firestore.collection<tipo>(path, ref =>
-        ref.orderBy('date').limit(numbersDocShow)).get();
+        ref.orderBy('date','desc').limit(numbersDocShow)).get();
     }
 
     public getLastSnapshot<tipo>(path:string, numbersDocShow:number):Observable<QuerySnapshot<tipo>>{
       return this.firestore.collection<tipo>(path, ref =>
-        ref.orderBy('date','desc').limit(numbersDocShow)).get();
+        ref.orderBy('date','desc').limitToLast(numbersDocShow)).get();
     }
     // ======================================================================================================
 

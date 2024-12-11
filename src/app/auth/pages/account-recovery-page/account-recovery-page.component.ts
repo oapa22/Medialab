@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FirestoreService } from './../../../radio/services/firebase.service';
 import { User } from '../../../shared/interfaces/user.interface';
 import { Router } from '@angular/router';
+import { Timestamp } from '@angular/fire/firestore';
 
 @Component({
     selector: 'app-account-recovery-page',
@@ -19,6 +20,7 @@ export class AccountRecoveryPageComponent {
     email: '',
     password: '',
     isAdmin: false,
+    date: Timestamp.now()
   }
 
   constructor(

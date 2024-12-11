@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FirestoreService } from './../../../radio/services/firebase.service';
 import { User } from '../../../shared/interfaces/user.interface';
 import { Router } from '@angular/router';
+import { Timestamp } from '@angular/fire/firestore';
 
 @Component({
     selector: 'auth-register-page',
@@ -18,6 +19,7 @@ export class RegisterPageComponent {
     email: '',
     password: '',
     isAdmin: false,
+    date: Timestamp.now()
   }
   confirmPassword: string = '';
 
@@ -26,9 +28,9 @@ export class RegisterPageComponent {
     private auth: AuthServiceService,
     private router: Router){
   }
-  
+
   ngOnInit(): void {
-    
+
   }
 
   async register(){

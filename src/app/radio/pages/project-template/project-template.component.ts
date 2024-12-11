@@ -40,6 +40,7 @@ export class ProjectTemplateComponent implements OnInit{
     password: '',
     isAdmin: false,
     likedProjects: [],
+    date: Timestamp.now(),
   }
 
   constructor(
@@ -124,7 +125,8 @@ export class ProjectTemplateComponent implements OnInit{
         email: res!.email,
         password: '',
         isAdmin: res!.isAdmin,
-        likedProjects: res!.likedProjects
+        likedProjects: res!.likedProjects,
+        date: res!.date,
       };
       this.updateLikedStatus()
     });
