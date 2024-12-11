@@ -8,6 +8,7 @@ import { SharedRoutingModule } from './shared-routing.module';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 import { MaterialModule } from '../material_module/material.module';
 import { ResquestLoaderComponent } from './renders/resquest-loader/resquest-loader.component';
+import { PaginationComponent } from './components/pagination/pagination.component';
 
 
 @NgModule({
@@ -17,6 +18,7 @@ import { ResquestLoaderComponent } from './renders/resquest-loader/resquest-load
     CardProjectsComponent,
     ConfirmDialogComponent,
     ResquestLoaderComponent,
+    PaginationComponent,
 
   ],
   imports: [
@@ -29,7 +31,7 @@ import { ResquestLoaderComponent } from './renders/resquest-loader/resquest-load
     Error404PageComponent,
     CardPodcastComponent,
     CardProjectsComponent,
-
+    PaginationComponent
   ]
 })
 export class SharedModule { }

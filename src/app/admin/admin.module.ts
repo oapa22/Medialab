@@ -11,6 +11,7 @@ import { NewPodcastComponent } from './pages/new-podcast/new-podcast.component';
 import { NewMessageComponent } from './pages/new-message/new-message.component';
 import { ListTemplateComponent } from './pages/list-template/list-template.component';
 import { CardTemplateComponent } from './components/card-template/card-template.component';
+import { SharedModule } from "../shared/shared.module";
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { CardTemplateComponent } from './components/card-template/card-template.
     AdminRoutingModule,
     ReactiveFormsModule,
     AdminRoutingModule,
-    EditorModule
-  ]
+    EditorModule,
+    SharedModule
+]
 })
 export class AdminModule { }

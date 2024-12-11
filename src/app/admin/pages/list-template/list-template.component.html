@@ -25,6 +25,11 @@
       path="podcast">
     </admin-card-template>
   </div>
+
+  <!-- paginacion -->
+  <div class="mt-5">
+    <shared-pagination  path='podcast' [numberDocsShow]=4 (podcastEmitter)="this.getPodcasts($event)"></shared-pagination>
+  </div>
 </div>
 
 <!-- Projects -->
@@ -40,6 +45,11 @@
       path="project">
     </admin-card-template>
   </div>
+
+  <!-- paginacion -->
+  <div class="mt-5">
+    <shared-pagination path='project' [numberDocsShow]=4 (projectEmitter)="this.getProjects($event)"></shared-pagination>
+  </div>
 </div>
 
  <!-- Messages -->
@@ -53,6 +63,11 @@
       paramRoute="mensaje"
       path="message">
     </admin-card-template>
+  </div>
+
+  <!-- paginacion -->
+  <div class="mt-5">
+    <shared-pagination path='message' [numberDocsShow]=4 (messageEmitter)="this.getMessages($event)"></shared-pagination>
   </div>
  </div>
 
@@ -68,5 +83,10 @@
       paramRoute="usuario"
       path="user">
     </admin-card-template>
+  </div>
+
+  <!-- paginacion -->
+  <div class="mt-5">
+    <shared-pagination path='user' [numberDocsShow]=4 (userEmitter)="this.getUsers($event)"></shared-pagination>
   </div>
 </div>

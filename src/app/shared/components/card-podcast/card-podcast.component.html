@@ -1,33 +1,4 @@
-<!-- <div class="justify-center m-2 rounded shadow text-wrap text-center bg-slate-50">
-  <div>
-    <p>{{this.podcast.title}}</p>
-  </div>
 
-  <div>
-    <img src="" alt="">
-  </div>
-
-  <div>
-    <p>{{ this.podcast.title }}</p>
-  </div>
-
-  <div class="p-2">
-    <a href="" class="p-2 rounded bg-yellow-500">Ver mas</a>
-  </div>
-</div> -->
-
-<!-- 352 o 152 -->
-
-<!-- <iframe
-  style="border-radius:12px"
-  src=""
-  width="100%" height="200"
-  frameBorder="0"
-  allowfullscreen=""
-  allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-  loading="lazy">
-</iframe> -->
-
-<div [innerHTML]="safeContent"></div>
-<hr style="height: 5px; width: 80%; border: none; margin: 20px auto;">
-
+<div class="w-full">
+  <div [innerHTML]="this.podcastFrame"></div>
+</div>

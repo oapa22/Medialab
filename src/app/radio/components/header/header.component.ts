@@ -3,6 +3,7 @@ import { BrowserRoute } from '../../interfaces/browser-route';
 import { FirestoreService } from '../../services/firebase.service';
 import { AuthServiceService } from '../../../auth/services/auth.service';
 import { User } from '../../../shared/interfaces/user.interface';
+import { Timestamp } from '@angular/fire/firestore';
 
 @Component({
     selector: 'radio-header',
@@ -21,6 +22,7 @@ export class HeaderComponent implements OnInit{
     email: '',
     password: '',
     isAdmin: false,
+    date: Timestamp.now()
   }
 
   constructor(
@@ -52,6 +54,7 @@ export class HeaderComponent implements OnInit{
         email: res!.email,
         password: '',
         isAdmin: res!.isAdmin,
+        date: res!.date,
       };
       console.log(this.user.email)
     });

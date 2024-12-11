@@ -1,14 +1,14 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FirestoreService } from '../../services/firebase.service';
 import { User } from '../../../shared/interfaces/user.interface';
 import { Message } from '../../../shared/interfaces/message.interface';
 import { Podcast } from '../../../shared/interfaces/podcast.interface';
 import { Project } from '../../../shared/interfaces/project.interface';
 import { CounterDocService } from '../../../shared/services/counter-doc.service';
 import { QueryDocumentSnapshot, QuerySnapshot } from '@angular/fire/compat/firestore';
+import { FirestoreService } from '../../../radio/services/firebase.service';
 
 @Component({
-    selector: 'radio-pagination',
+    selector: 'shared-pagination',
     templateUrl: './pagination.component.html',
     styleUrl: './pagination.component.css',
     standalone: false
@@ -58,13 +58,14 @@ export class PaginationComponent implements OnInit{
 
   public getFirstDocument(path: 'user'|'podcast'|'message'|'project'):void{
     if(path == 'user'){
-      this.serviceFireStore.getFirstSnapshot<User>(path, this.numberDocsShow).subscribe(res => {
+      this.serviceFireStore.getFirstSnapshot<User>(this.path, this.numberDocsShow).subscribe(res =>{
         this.usersQuery = res;
-        const userstDocs: User[] = this.usersQuery.docs.map(doc => doc.data() as User);
-        this.userEmitter.emit(userstDocs);
+        const usersDocs: User[] = this.usersQuery.docs.map(doc => doc.data() as User);
+        this.userEmitter.emit(usersDocs);
+        console.log("usersQuery: ", res.size);
       });
     } else if(path == 'podcast'){
-      this.serviceFireStore.getFirstSnapshot<Podcast>(path, this.numberDocsShow).subscribe(res => {
+      this.serviceFireStore.getFirstSnapshot<Podcast>(this.path, this.numberDocsShow).subscribe(res =>{
         this.podcastsQuery = res;
         const podcastDocs: Podcast[] = this.podcastsQuery.docs.map(doc => doc.data() as Podcast);
         this.podcastEmitter.emit(podcastDocs);
@@ -182,8 +183,8 @@ export class PaginationComponent implements OnInit{
       }
       console.log("totalDocs: ",this.totalDocs);
       console.log("numberDocsShow: ",this.numberDocsShow);
-      this.totalPages = Math.ceil(this.totalDocs/this.numberDocsShow);
 
+      this.totalPages = Math.ceil(this.totalDocs/this.numberDocsShow);
 
       console.log("totalPages: ",this.totalPages);
 

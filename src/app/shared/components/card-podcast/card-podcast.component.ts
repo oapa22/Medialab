@@ -11,17 +11,17 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 export class CardPodcastComponent implements OnInit{
   @Input()
   public podcast!:Podcast;
-  safeContent: SafeHtml | null = null;
-  
-  constructor(
-    private sanitizer: DomSanitizer,
-  ){
+
+
+  public podcastFrame: SafeHtml = '';
+
+  constructor(private sanitizer: DomSanitizer){
 
   }
+
   ngOnInit(): void {
     if(!this.podcast) throw new Error('Podcast property is required');
-    if (this.podcast) {
-      this.safeContent = this.sanitizer.bypassSecurityTrustHtml(this.podcast.frame || '');
-    }
+
+    this.podcastFrame = this.sanitizer.bypassSecurityTrustHtml(this.podcast.frame);
   }
 }

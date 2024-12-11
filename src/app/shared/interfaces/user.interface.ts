@@ -1,3 +1,5 @@
+import { Timestamp } from '@angular/fire/firestore';
+
 export interface User {
   uid: string;
   id?: string;
@@ -6,4 +8,5 @@ export interface User {
   password: string;
   isAdmin: boolean;
   likedProjects?: string[];
+  date: Timestamp;
 }

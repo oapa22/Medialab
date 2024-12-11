@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { User } from '../../../shared/interfaces/user.interface';
 import { Podcast } from '../../../shared/interfaces/podcast.interface';
 import { Project } from '../../../shared/interfaces/project.interface';
 import { Message } from '../../../shared/interfaces/message.interface';
 import { FirestoreService } from '../../../radio/services/firebase.service';
-import { User } from '../../../shared/interfaces/user.interface';
 
 @Component({
     selector: 'admin-list-template',
@@ -28,24 +28,24 @@ export class ListTemplateComponent implements OnInit{
 
   ngOnInit(): void {
       if (this.router.url.includes('lista-podcasts')) {
-        this.fireStoreService.getCollection<Podcast>('podcast').subscribe(res => {
-          this.podcasts = res;
-        });
+        // this.fireStoreService.getCollection<Podcast>('podcast').subscribe(res => {
+        //   this.podcasts = res;
+        // });
         this.valueLabel = 'podcast';
       } else if (this.router.url.includes('lista-proyectos')) {
-        this.fireStoreService.getCollection<Project>('project').subscribe(res => {
-          this.projects = res;
-        });
+        // this.fireStoreService.getCollection<Project>('project').subscribe(res => {
+        //   this.projects = res;
+        // });
         this.valueLabel = 'proyecto';
       } else if (this.router.url.includes('lista-mensajes')) {
-        this.fireStoreService.getCollection<Message>('message').subscribe(res => {
-          this.messages = res;
-        });
+        // this.fireStoreService.getCollection<Message>('message').subscribe(res => {
+        //   this.messages = res;
+        // });
         this.valueLabel = 'mensaje';
       } else if(this.router.url.includes('lista-usuarios')){
-        this.fireStoreService.getCollection<User>('user').subscribe(res => {
-          this.users = res;
-        });
+        // this.fireStoreService.getCollection<User>('user').subscribe(res => {
+        //   this.users = res;
+        // });
         this.valueLabel = 'usuario';
       } else {
         this.router.navigate(['/radio-utpl/admin/']);
@@ -60,6 +60,22 @@ export class ListTemplateComponent implements OnInit{
       console.log(valueLink);
       this.router.navigate([valueLink]);
     }
+  }
+
+  public getPodcasts(podcasts:Podcast[]):void{
+    this.podcasts = podcasts;
+  }
+
+  public getProjects(projects:Project[]):void{
+    this.projects = projects;
+  }
+
+  public getMessages(messages:Message[]):void{
+    this.messages = messages;
+  }
+
+  public getUsers(users:User[]):void{
+    this.users = users;
   }
 
   public formatDate(timestamp: any): string {

@@ -7,6 +7,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, FormGroup } from '@angular/forms';
 import { finalize, Subscription, switchMap } from 'rxjs';
 import { ResquestLoaderRenderService } from '../../../shared/renders/resquest-loader.service';
+import { CounterDocService } from '../../../shared/services/counter-doc.service';
 
 @Component({
     selector: 'admin-new-project',
@@ -48,6 +49,7 @@ export class NewProjectComponent implements OnInit{
 
   constructor(
     private firestore: FirestoreService,
+    private counterService:CounterDocService,
     private storage: AngularFireStorage,
     private activatedRoute:ActivatedRoute,
     private router:Router,
@@ -196,9 +198,15 @@ export class NewProjectComponent implements OnInit{
 
       this.project.id = id;
       this.project.date = Timestamp.now();
-  
+
       this.firestore.createDoc(this.project, path, id).then(res => {
         console.log('respuesta ->', res);
+
+        this.counterService.incrementCounter('project').then( (res) => {
+          // console.log('Se incremento el contador project');
+        }).catch((error) => {
+          console.error('Error al actualizar el mensaje:', error);
+        });
       }).catch(error => console.log('Error creating document', error));
     } else {
 

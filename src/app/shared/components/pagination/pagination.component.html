@@ -1,0 +1,66 @@
+<div class="flex items-center justify-center space-x-4 text-sm">
+  <!-- Botón para navegar a la izquierda -->
+  <button (click)="prevPage()"
+  class="boxMeasurePagination flex items-center justify-center hover:bg-gray-400 disabled:opacity-50"
+  [disabled]="currentIndex === 1">
+
+    <svg width="8" height="14" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M7 13L1 7L7 1" stroke="#06446F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </button>
+
+   <ng-container *ngIf="this.totalPages >= 6">
+
+
+    <!-- Primer Indice página -->
+    <button (click)="setFirstwindowArray()"
+          class="boxMeasurePagination hover:bg-gray-400"
+          [ngClass]="{'bg-blue-utpl text-white':currentIndex==1}"
+    >
+          {{ 1 }}
+    </button>
+
+    <!-- Puntos suspensivos si hay más de 5 páginas -->
+    <span *ngIf="currentIndex > 3">...</span>
+  </ng-container>
+
+
+
+  <!-- Índices de páginas -->
+  <div class="flex items-center space-x-2" *ngIf="this.totalPages != 0">
+    <!-- Mostramos las primeras 4 o los índices dinámicos -->
+    <ng-container *ngFor="let page of windowArray">
+      <button
+        (click)="goToPage(page)"
+        class="boxMeasurePagination hover:bg-gray-400"
+        [ngClass]="{'bg-blue-utpl text-white':currentIndex==page}"
+      >
+        {{ page }}
+      </button>
+    </ng-container>
+
+  </div>
+
+  <ng-container *ngIf="this.totalPages >= 6 ">
+    <!-- Puntos suspensivos si hay más de 5 páginas -->
+    <span *ngIf="currentIndex < this.totalPages-2">...</span>
+
+    <!-- Ultimo Indice página -->
+    <button (click)="setLastwindowArray()"
+            class="boxMeasurePagination hover:bg-gray-400"
+            [ngClass]="{'bg-blue-utpl text-white':currentIndex==totalPages}">
+      {{ totalPages }}
+    </button>
+  </ng-container>
+
+  <!-- Botón para navegar a la derecha -->
+  <button (click)="nextPage()"
+        class="boxMeasurePagination flex items-center justify-center hover:bg-gray-400 disabled:opacity-50"
+        [disabled]="currentIndex === totalPages">
+
+    <svg width="8" height="14" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M1 13L7 7L1 1" stroke="#06446F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </button>
+</div>
+
