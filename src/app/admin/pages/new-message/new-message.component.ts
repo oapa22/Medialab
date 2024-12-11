@@ -7,6 +7,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, FormGroup } from '@angular/forms';
 import { switchMap } from 'rxjs';
 import { ResquestLoaderRenderService } from '../../../shared/renders/resquest-loader.service';
+import { CounterDocService } from '../../../shared/services/counter-doc.service';
 
 @Component({
     selector: 'admin-new-message',
@@ -47,6 +48,7 @@ export class NewMessageComponent implements OnInit{
     private firestore: FirestoreService,
     private activatedRoute:ActivatedRoute,
     private storage: AngularFireStorage,
+    private counterService:CounterDocService,
     private router:Router,
 
     private requestLoader:ResquestLoaderRenderService
@@ -101,7 +103,7 @@ export class NewMessageComponent implements OnInit{
   //   this.requestLoader.initRequestLoader(title,description);
 
   //   this.message.name = this.currentMessageFormValue.name;
-    
+
   //   if (this.message.id) {
   //     const path = 'message';
   //     const id = this.message.id;
@@ -127,7 +129,7 @@ export class NewMessageComponent implements OnInit{
   //   const input = event.target as HTMLInputElement;
   //   if (input.files && input.files.length > 0) {
   //     this.selectedFile = input.files[0];
-  //     this.message.photo_filename = input.files[0].name;  
+  //     this.message.photo_filename = input.files[0].name;
   //     const reader = new FileReader();
   //     reader.onload = e => this.imageSrc = reader.result;
   //     reader.readAsDataURL(this.selectedFile);
@@ -138,13 +140,13 @@ export class NewMessageComponent implements OnInit{
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
       this.selectedAudio = input.files[0];
-      this.message.audio_filename = input.files[0].name;  
+      this.message.audio_filename = input.files[0].name;
       const reader = new FileReader();
       reader.onload = e => this.audioSrc = reader.result;
       reader.readAsDataURL(this.selectedAudio);
     }
   }
-  
+
   createMessage() {
     if(this.currentRoute.includes('nuevo')){
       let title: string = 'CREANDO MENSAJE';
@@ -155,7 +157,7 @@ export class NewMessageComponent implements OnInit{
         const filePath = `images_message/${this.selectedFile.name}`;
         const fileRef = this.storage.ref(filePath);
         const task = this.storage.upload(filePath, this.selectedFile);
-  
+
         task.snapshotChanges().toPromise().then(() => {
           fileRef.getDownloadURL().toPromise().then(url => {
             this.message.photo_url = url;
@@ -174,7 +176,7 @@ export class NewMessageComponent implements OnInit{
           const filePath = `images_message/${this.selectedFile.name}`;
           const fileRef = this.storage.ref(filePath);
           const task = this.storage.upload(filePath, this.selectedFile);
-    
+
           task.snapshotChanges().toPromise().then(() => {
             fileRef.getDownloadURL().toPromise().then(url => {
               this.message.photo_url = url;
@@ -215,14 +217,21 @@ export class NewMessageComponent implements OnInit{
     const path = 'message'
     if(this.currentRoute.includes('nuevo')){
       const id = this.firestore.createId();
-  
+
       this.message.name = this.currentMessageFormValue.name;
-  
+
       this.message.id = id;
       this.message.date = Timestamp.now();
-  
+
       this.firestore.createDoc(this.message, path, id).then(res => {
         console.log('respuesta ->', res);
+
+        this.counterService.incrementCounter('message').then( (res) => {
+          this.router.navigate(['radio-utpl/admin/lista-podcasts']);
+          // console.log('Se ha incrementado el contador de messages');
+        }).catch((error) => {
+          console.error('Error al actualizar el mensaje:', error);
+        });
       }).catch(error => console.log('Error creating document', error));
     } else {
       this.message.name = this.currentMessageFormValue.name;
@@ -240,15 +249,15 @@ export class NewMessageComponent implements OnInit{
 
   formatDate() {
     const date = this.message.date.toDate();
-  
+
     const meses = [
       'enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio',
       'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'
     ];
-  
+
     const dia = date.getDate();
-    const mes = meses[date.getMonth()]; 
-    const anio = date.getFullYear(); 
+    const mes = meses[date.getMonth()];
+    const anio = date.getFullYear();
 
     this.date = `${dia} de ${mes} de ${anio}`;
     this.dateN = `${dia} de ${mes} de ${anio}`;

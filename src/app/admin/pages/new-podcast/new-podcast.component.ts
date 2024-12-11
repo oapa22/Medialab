@@ -7,6 +7,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap } from 'rxjs';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ResquestLoaderRenderService } from '../../../shared/renders/resquest-loader.service';
+import { CounterDocService } from '../../../shared/services/counter-doc.service';
 
 @Component({
     selector: 'admin-new-podcast',
@@ -36,6 +37,7 @@ export class NewPodcastComponent implements OnInit {
 
   constructor(
     private firestore: FirestoreService,
+    private counterService:CounterDocService,
     private datePipe: DatePipe,
     private requestLoader: ResquestLoaderRenderService,
     private activatedRouter: ActivatedRoute,
@@ -45,16 +47,16 @@ export class NewPodcastComponent implements OnInit {
   ngOnInit(): void {
     this.formatDate();
     this.currentRoute = this.router.url;
-  
+
     if (this.router.url.includes('editar-podcast')) {
       this.activatedRouter.params.pipe(
         switchMap(({ id }) => this.firestore.getDocPodcast<Podcast>('podcast', id))
       ).subscribe(podcast => {
         if (!podcast) {
           this.router.navigateByUrl('/');
-          return;  
+          return;
         }
-  
+
         this.podcast = podcast;
         this.podcastForm.reset(podcast);
         this.formatDate();
@@ -63,7 +65,7 @@ export class NewPodcastComponent implements OnInit {
       this.formatDate();
     }
   }
-  
+
 
   createPodcast() {
     let title: string = 'CREANDO PODCAST';
@@ -80,6 +82,12 @@ export class NewPodcastComponent implements OnInit {
 
     this.firestore.createDoc(this.podcast, path, id).then(res => {
       console.log('respuesta ->', res);
+
+      this.counterService.incrementCounter('podcast').then( (res) => {
+        // console.log('Se incremento el contador podcast');
+      }).catch((error) => {
+        console.error('Error al actualizar el mensaje:', error);
+      });
     });
   }
 
@@ -87,20 +95,20 @@ export class NewPodcastComponent implements OnInit {
     let title: string = 'ACTUALIZANDO PODCAST';
     let description: string = 'Espere un momento mientras los datos se actualizan en la nube.';
     this.requestLoader.initRequestLoader(title, description);
-  
+
     const updatedPodcast = this.podcastForm.value as Podcast;
-    
+
     if (this.podcast.id) {
       const path = 'podcast';
       const id = this.podcast.id;
-  
+
       this.firestore.updateDoc(path, id, updatedPodcast).then(() => {
       }).catch((error) => {
         console.error('Error al actualizar el podcast:', error);
       });
     }
   }
-  
+
 
   formatDate() {
     const date = this.podcast.date.toDate();

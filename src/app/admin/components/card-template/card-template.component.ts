@@ -9,6 +9,7 @@ import { Timestamp } from 'firebase/firestore';
 import { ResquestLoaderRenderService } from '../../../shared/renders/resquest-loader.service';
 import { ConfirmDialogService } from '../../../shared/renders/confirm-dialog.service';
 import { User } from '../../../shared/interfaces/user.interface';
+import { CounterDocService } from '../../../shared/services/counter-doc.service';
 
 @Component({
     selector: 'admin-card-template',
@@ -24,7 +25,7 @@ export class CardTemplateComponent implements OnInit{
   @Input() public summary:string = '';
   @Input() public id:string = '';
   @Input() public paramRoute:'podcast' | 'proyecto' | 'mensaje' | 'usuario' |'' = '';
-  @Input() public path:'podcast' | 'project' | 'message' | 'user' | '' = '';
+  @Input() public path!: 'user'|'podcast'|'message'|'project';
 
   public route:string = '';
   public hasLoaded:boolean = false;
@@ -32,7 +33,7 @@ export class CardTemplateComponent implements OnInit{
 
   constructor(
     private router:Router,
-
+    private counterService:CounterDocService,
     private firestore: FirestoreService,
     private dialog:MatDialog,
     private confirmDialog:ConfirmDialogService,
@@ -70,6 +71,14 @@ export class CardTemplateComponent implements OnInit{
         let title:string = this.paramRoute.toUpperCase() + ' ELIMINADO';
         let description:string = 'Espere un momento mientras los datos son removidos de la nube.';
         this.requestLoader.initRequestLoader(title,description);
+
+        // Decrementar el contador
+        this.counterService.decrementCounter(this.path).then( (res) => {
+          window.location.reload();
+          // console.log('Se ha decrementador el contador de ', this.path);
+        }).catch((error) => {
+          console.error('Error al actualizar el mensaje:', error);
+        });
       }
     });
 
@@ -87,7 +96,7 @@ export class CardTemplateComponent implements OnInit{
 
   public toggleAdmin(event: any): void {
     const isAdmin = event.target.checked; // Capturamos el estado del checkbox.
-  
+
     // Actualizar en la base de datos
     this.firestore.updateDoc('user', this.id, { isAdmin })
       .then(() => {
