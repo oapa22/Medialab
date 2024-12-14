@@ -56,60 +56,43 @@ export class PaginationComponent implements OnInit{
     this.initialPagination(this.path);
   }
 
-  public getFirstDocument(path: 'user'|'podcast'|'message'|'project'):void{
+  public async getFirstDocument(path: 'user'|'podcast'|'message'|'project'):Promise<void>{
     if(path == 'user'){
-      this.serviceFireStore.getFirstSnapshot<User>(this.path, this.numberDocsShow).subscribe(res =>{
-        this.usersQuery = res;
-        const usersDocs: User[] = this.usersQuery.docs.map(doc => doc.data() as User);
-        this.userEmitter.emit(usersDocs);
-        console.log("usersQuery: ", res.size);
-      });
+      this.usersQuery = await this.serviceFireStore.getFirstQuerySnapshot<User>(this.path, this.numberDocsShow);
+      const usersDocs: User[] = this.usersQuery.docs.map(doc => doc.data() as User);
+      this.userEmitter.emit(usersDocs);
     } else if(path == 'podcast'){
-      this.serviceFireStore.getFirstSnapshot<Podcast>(this.path, this.numberDocsShow).subscribe(res =>{
-        this.podcastsQuery = res;
-        const podcastDocs: Podcast[] = this.podcastsQuery.docs.map(doc => doc.data() as Podcast);
-        this.podcastEmitter.emit(podcastDocs);
-      });
+      this.podcastsQuery = await this.serviceFireStore.getFirstQuerySnapshot<Podcast>(this.path, this.numberDocsShow);
+      const podcastDocs: Podcast[] = this.podcastsQuery.docs.map(doc => doc.data() as Podcast);
+      this.podcastEmitter.emit(podcastDocs);
     } else if(path == 'message'){
-      this.serviceFireStore.getFirstSnapshot<Message>(this.path, this.numberDocsShow).subscribe(res =>{
-        this.messagesQuery = res;
-        const messagesDocs: Message[] = this.messagesQuery.docs.map(doc => doc.data() as Message);
-        this.messageEmitter.emit(messagesDocs);
-      });
+      this.messagesQuery = await this.serviceFireStore.getFirstQuerySnapshot<Message>(this.path, this.numberDocsShow);
+      const messagesDocs: Message[] = this.messagesQuery.docs.map(doc => doc.data() as Message);
+      this.messageEmitter.emit(messagesDocs);
     } else if(path == 'project'){
-      this.serviceFireStore.getFirstSnapshot<Project>(this.path, this.numberDocsShow).subscribe(res =>{
-        this.projectsQuery = res;
-        const projectsDocs: Project[] = this.projectsQuery.docs.map(doc => doc.data() as Project);
-        this.projectEmitter.emit(projectsDocs);
-      });
+      this.projectsQuery = await this.serviceFireStore.getFirstQuerySnapshot<Project>(this.path, this.numberDocsShow);
+      const projectsDocs: Project[] = this.projectsQuery.docs.map(doc => doc.data() as Project);
+      this.projectEmitter.emit(projectsDocs);
     }
   }
 
   public async getLastDocuments(path: 'user'|'podcast'|'message'|'project'):Promise<void>{
     if(path == 'user'){
-      this.serviceFireStore.getLastSnapshot<User>(path, this.lastNumberDocs).subscribe(res => {
-        this.usersQuery = res;
-        const userstDocs: User[] = this.usersQuery.docs.map(doc => doc.data() as User);
-        this.userEmitter.emit(userstDocs);
-      });
+      this.usersQuery = await this.serviceFireStore.getLastQuerySnapShot<User>(this.path, this.lastNumberDocs);
+      const usersDocs: User[] = this.usersQuery.docs.map(doc => doc.data() as User);
+      this.userEmitter.emit(usersDocs);
     } else if(path == 'podcast'){
-      this.serviceFireStore.getLastSnapshot<Podcast>(path, this.lastNumberDocs).subscribe(res => {
-        this.podcastsQuery = res;
-        const podcastDocs: Podcast[] = this.podcastsQuery.docs.map(doc => doc.data() as Podcast);
-        this.podcastEmitter.emit(podcastDocs);
-      });
+      this.podcastsQuery = await this.serviceFireStore.getLastQuerySnapShot<Podcast>(this.path, this.lastNumberDocs);
+      const podcastDocs: Podcast[] = this.podcastsQuery.docs.map(doc => doc.data() as Podcast);
+      this.podcastEmitter.emit(podcastDocs);
     } else if(path == 'message'){
-      this.serviceFireStore.getLastSnapshot<Message>(this.path, this.lastNumberDocs).subscribe(res =>{
-        this.messagesQuery = res;
-        const messagesDocs: Message[] = this.messagesQuery.docs.map(doc => doc.data() as Message);
-        this.messageEmitter.emit(messagesDocs);
-      });
+      this.messagesQuery = await this.serviceFireStore.getLastQuerySnapShot<Message>(this.path, this.lastNumberDocs);
+      const messagesDocs: Message[] = this.messagesQuery.docs.map(doc => doc.data() as Message);
+      this.messageEmitter.emit(messagesDocs);
     } else if(path == 'project'){
-      this.serviceFireStore.getLastSnapshot<Project>(this.path, this.lastNumberDocs).subscribe(res =>{
-        this.projectsQuery = res;
-        const projectsDocs: Project[] = this.projectsQuery.docs.map(doc => doc.data() as Project);
-        this.projectEmitter.emit(projectsDocs);
-      });
+      this.projectsQuery = await this.serviceFireStore.getLastQuerySnapShot<Project>(this.path, this.lastNumberDocs);
+      const projectsDocs: Project[] = this.projectsQuery.docs.map(doc => doc.data() as Project);
+      this.projectEmitter.emit(projectsDocs);
     }
   }
 
