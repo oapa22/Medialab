@@ -5,21 +5,21 @@
 
   <!-- Seccion Contenido -->
   <div class="w-[70%] flex flex-col p-4 justify-between border-y-2 border-[#C4C4C4]">
-    <p class="text-2xl">{{ this.title }}</p>
-    <p class="text-xl">{{ this.date }}</p>
-    <p class="text-base">{{ this.summary}}</p>
+    <p class="text-title-2 font-semibold">{{ this.title }}</p>
+    <p class="text-content-1">{{ this.date }}</p>
+    <p class="text-content-2">{{ this.summary}}</p>
   </div>
 
   <!-- Secction Botones -->
-  <div class="w-[10%] grid grid-rows-2 bg-[#D9D9D980] border-2  border-[#C4C4C4]">
+  <div class="w-[15%] sm:w-[10%] grid grid-rows-2 bg-[#D9D9D980] border-2  border-[#C4C4C4]">
 
-    <div class="flex flex-col justify-center items-center border-b-2 border-[#C4C4C4]">
+    <div class="flex flex-col justify-center items-center text-content-3 border-b-2 border-[#C4C4C4]">
       <ng-container *ngIf="this.userTemplate">
-        <p class="text-sm p-1">Administrador</p>
+        <p class="p-1">Administrador</p>
         <input
           type="checkbox"
           class="w-6 h-6 text-blue-600 bg-gray-100 border-gray-300 rounded-f focus:ring-blue-500"
-          [checked]="isAdmin" 
+          [checked]="isAdmin"
           (change)="toggleAdmin($event)"
         >
       </ng-container>

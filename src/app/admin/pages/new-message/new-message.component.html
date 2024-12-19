@@ -40,7 +40,7 @@
     </div>
 
     <!-- Seccion Fecha Actual -->
-    <div class="flex justify-center mt-10 mb-4">
+    <div class="flex justify-center mt-10 mb-4 text-content-1">
       <p *ngIf="this.currentRoute.includes('nuevo')"><strong>Fecha de publicación:</strong> {{date}}</p>
       <p *ngIf="this.currentRoute.includes('editar')"><strong>Fecha de publicación:</strong> {{dateN}}</p>
     </div>
@@ -49,11 +49,11 @@
     <!-- Seccion del Titulo -->
     <div class="mb-6">
       <div class="pb-2 text-wrap">
-        <p class="text-base"> <strong>Nombre de referencia </strong></p>
+        <p class="text-content-1"> <strong>Nombre de referencia </strong></p>
       </div>
 
       <input type="text" formControlName="name"
-        class="w-full h-[33px] pl-3 border-2 border-[#C4C4C4] rounded-md"
+        class="w-full h-[33px] text-content-1 pl-3 border-2 border-[#C4C4C4] rounded-md"
       >
     </div>
 
@@ -61,7 +61,7 @@
     <div class="mb-6">
       <!-- <input type="file" class="border border-gray-300 p-2" formControlName="photo_url" (change)="selectImage($event)"> -->
       <div class="pb-2 text-wrap">
-        <p class="text-base"> <strong>Imagen de portada </strong><span class="text-xs text-[#9D9D9D]">La dimensión de la imagen debe ser de width="300px" height="200px"</span></p>
+        <p class="text-content-1"> <strong>Imagen de portada </strong><span class="text-content-2 text-[#9D9D9D]">La dimensión de la imagen debe ser de width="300px" height="200px"</span></p>
       </div>
 
       <!-- <div class="w-full h-[59px] flex items-center">
@@ -75,7 +75,7 @@
         </div>
       </div> -->
 
-      <div class="w-full h-[59px] flex items-center">
+      <div class="w-full h-[59px] flex items-center text-content-1">
         <input #fileImageInput type="file" class="hidden imagenSelec" (change)="selectImage($event)">
         <button
           class="w-[20%] h-full bg-[#EAEAEA] hover:bg-slate-400 transition duration-300 border-2 border-[black]"
@@ -95,7 +95,7 @@
     <div class="mb-6">
       <!-- <input type="file" class="border border-gray-300 p-2" formControlName="photo_url" (change)="selectImage($event)"> -->
       <div class="pb-2 text-wrap">
-        <p class="text-base"> <strong>Audio </strong><span class="text-xs text-[#9D9D9D]">Debe estar en formato MP3</span></p>
+        <p class="text-content-1"> <strong>Audio </strong><span class="text-content-2 text-[#9D9D9D]">Debe estar en formato MP3</span></p>
       </div>
 
       <!-- <div class="w-full h-[59px] flex items-center">
@@ -109,7 +109,7 @@
         </div>
       </div> -->
 
-      <div class="w-full h-[59px] flex items-center">
+      <div class="w-full h-[59px] flex items-center text-content-1">
         <input #fileAudioInput type="file" accept="audio/MP3" class="hidden audioSelec" (change)="selectAudio($event)">
         <button
           class="w-[20%] h-full bg-[#EAEAEA] hover:bg-slate-400 transition duration-300 border-2 border-[black]"
@@ -128,7 +128,7 @@
 
 
     <!-- Botones para crear o actualizar un Projecto -->
-    <div class="w-full flex justify-center">
+    <div class="w-full flex justify-center text-content-1">
       <button
         *ngIf="this.currentRoute.includes('nuevo')"
         class="p-2 text-white bg-[#00ACC1] rounded-lg hover:bg-blue-utpl"

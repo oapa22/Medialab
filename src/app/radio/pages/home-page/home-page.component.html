@@ -135,7 +135,7 @@
       </svg>
     </div>
 
-    <div class="grid grid-cols-3" *ngIf="this.podcasts.length > 0">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-y-3" *ngIf="this.podcasts.length > 0">
       <div *ngFor="let podcast of podcasts" class="mx-5">
         <shared-card-podcast [podcast]="podcast"></shared-card-podcast>
       </div>
