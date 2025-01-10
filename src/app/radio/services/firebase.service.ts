@@ -108,7 +108,6 @@ export class FirestoreService {
         ref.orderBy('date').limit(numberShow)).valueChanges(); //TODO:cambiar el 'createdAt' por id o algo
     }
 
-
     // Método para obtener la siguiente página
     public loadNextSnapshot<tipo>(path:string, lastVisible:QueryDocumentSnapshot<tipo>,numbersDocShow:number):Observable<QuerySnapshot<tipo>>{
       return this.firestore.collection<tipo>(path, ref =>

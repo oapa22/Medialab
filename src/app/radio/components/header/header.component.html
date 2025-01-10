@@ -32,7 +32,7 @@
           {{item.titleRoute | uppercase}}
         </a>
 
-        <a *ngIf="logged == true"
+        <a *ngIf="user?.isAdmin && logged"
           [ngClass]="{'text-yellow-utpl': currentRoute.includes( '/radio-utpl/admin')}"
           href=""
           class="p-1 hover:text-yellow-utpl  transition duration-300 ease-in-out"

@@ -4,6 +4,7 @@ import { FirestoreService } from './../../../radio/services/firebase.service';
 import { User } from '../../../shared/interfaces/user.interface';
 import { Router } from '@angular/router';
 import { Timestamp } from '@angular/fire/firestore';
+import { CounterDocService } from '../../../shared/services/counter-doc.service';
 
 @Component({
     selector: 'auth-register-page',
@@ -26,6 +27,7 @@ export class RegisterPageComponent {
   constructor(
     private firestore: FirestoreService,
     private auth: AuthServiceService,
+    private counterService:CounterDocService,
     private router: Router){
   }
 
@@ -51,7 +53,9 @@ export class RegisterPageComponent {
       this.user.id = id
       this.user.uid = id
       this.user.password = '';
+      this.user.date = Timestamp.now()
       this.firestore.createDoc(this.user, path, id)
+      this.counterService.incrementCounter('user');
       this.router.navigate(['radio-utpl/inicio'])
     }
   }

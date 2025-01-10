@@ -60,8 +60,8 @@ export class PaginationComponent implements OnInit{
     if(path == 'user'){
       this.serviceFireStore.getFirstSnapshot<User>(path, this.numberDocsShow).subscribe(res => {
         this.usersQuery = res;
-        const userstDocs: User[] = this.usersQuery.docs.map(doc => doc.data() as User);
-        this.userEmitter.emit(userstDocs);
+        const usersDocs: User[] = this.usersQuery.docs.map(doc => doc.data() as User);
+        this.userEmitter.emit(usersDocs);
       });
     } else if(path == 'podcast'){
       this.serviceFireStore.getFirstSnapshot<Podcast>(path, this.numberDocsShow).subscribe(res => {
@@ -88,8 +88,8 @@ export class PaginationComponent implements OnInit{
     if(path == 'user'){
       this.serviceFireStore.getLastSnapshot<User>(path, this.lastNumberDocs).subscribe(res => {
         this.usersQuery = res;
-        const userstDocs: User[] = this.usersQuery.docs.map(doc => doc.data() as User);
-        this.userEmitter.emit(userstDocs);
+        const usersDocs: User[] = this.usersQuery.docs.map(doc => doc.data() as User);
+        this.userEmitter.emit(usersDocs);
       });
     } else if(path == 'podcast'){
       this.serviceFireStore.getLastSnapshot<Podcast>(path, this.lastNumberDocs).subscribe(res => {
