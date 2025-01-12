@@ -108,12 +108,6 @@ export class FirestoreService {
         ref.orderBy('date').limit(numberShow)).valueChanges(); //TODO:cambiar el 'createdAt' por id o algo
     }
 
-    // Método para obtener la siguiente página
-    public loadNextSnapshot<tipo>(path:string, lastVisible:QueryDocumentSnapshot<tipo>,numbersDocShow:number):Observable<QuerySnapshot<tipo>>{
-      return this.firestore.collection<tipo>(path, ref =>
-        ref.orderBy('date').startAfter(lastVisible).limit(numbersDocShow)).get();
-    }
-
     public async loadNextSnapshotAsync<tipo>(
       path: string,
       lastVisible: QueryDocumentSnapshot<tipo>,
@@ -140,9 +134,16 @@ export class FirestoreService {
       return firstValueFrom(observable); // Devuelve una Promise
     }
 
-    public loadPrevSnapshot<tipo>(path:string, firstVisible:QueryDocumentSnapshot<tipo>,numbersDocShow:number):Observable<QuerySnapshot<tipo>>{
-      return this.firestore.collection<tipo>(path, ref =>
-        ref.orderBy('date').endBefore(firstVisible).limitToLast(numbersDocShow)).get();
+    public async getFirstQuerySnapshot<tipo>(path:string, numbersDocShow:number):Promise<QuerySnapshot<tipo>>{
+      const observable: Observable<QuerySnapshot<tipo>> = this.firestore.collection<tipo>(path, ref =>
+        ref.orderBy('date','desc').limit(numbersDocShow)).get();
+      return firstValueFrom(observable);
+    }
+
+    public async getLastQuerySnapShot<tipo>(path:string, numbersDocShow:number):Promise<QuerySnapshot<tipo>>{
+      const observable: Observable<QuerySnapshot<tipo>> = this.firestore.collection<tipo>(path, ref =>
+        ref.orderBy('date','desc').limitToLast(numbersDocShow)).get();
+      return firstValueFrom(observable);
     }
 
     public getFirstSnapshot<tipo>(path:string, numbersDocShow:number):Observable<QuerySnapshot<tipo>>{
@@ -154,6 +155,20 @@ export class FirestoreService {
       return this.firestore.collection<tipo>(path, ref =>
         ref.orderBy('date','desc').limitToLast(numbersDocShow)).get();
     }
+
+
+    // Método para obtener la siguiente página, obtener un Observable de tipo QuerySnapshot
+    public loadNextSnapshot<tipo>(path:string, lastVisible:QueryDocumentSnapshot<tipo>,numbersDocShow:number):Observable<QuerySnapshot<tipo>>{
+      return this.firestore.collection<tipo>(path, ref =>
+        ref.orderBy('date').startAfter(lastVisible).limit(numbersDocShow)).get();
+    }
+
+    // Método para obtener la anterior página, obtener un Observable de tipo QuerySnapshot
+    public loadPrevSnapshot<tipo>(path:string, firstVisible:QueryDocumentSnapshot<tipo>,numbersDocShow:number):Observable<QuerySnapshot<tipo>>{
+      return this.firestore.collection<tipo>(path, ref =>
+        ref.orderBy('date').endBefore(firstVisible).limitToLast(numbersDocShow)).get();
+    }
+
     // ======================================================================================================
 
 

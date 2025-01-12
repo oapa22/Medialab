@@ -4,7 +4,7 @@
   <div class="flex justify-end p-1">
 
     <!-- Logo MediaLab -->
-     <a href="" target="_blank" title="Sitio web MediaLab" class="flex items-center mx-10 text-xs">
+     <a href="https://medialab.utpl.edu.ec/" target="_blank" title="Sitio web MediaLab" class="flex items-center mx-10 text-content-3">
       <p class="mr-3 text-white">Visítanos también en</p>
       <img src="https://firebasestorage.googleapis.com/v0/b/radioutpl.appspot.com/o/media%2Flgo_medialab.png?alt=media&token=0975dd1b-433b-4969-a75e-955ed1488afb" class="h-5 w-9" alt="Sitio web MediaLab">
      </a>
@@ -17,11 +17,11 @@
      <!-- class="lg:ml-32 mb-1" -->
     <div class="col-span-1 grid justify-center" >
       <img src="radio_media/logo-radioutpl-color.png" alt="Logo Radio UTPL"
-        class="h-20 w-25"
+        class="h-10 w-15  md:h-20 md:w-25"
       >
     </div>
     <!--  class="  sm:space-x-7 text-xs lg:text-sm  text-white" -->
-    <nav class="col-span-3  sm:space-x-10 text-xs lg:text-sm font-semibold text-white">
+    <nav class="col-span-3  sm:space-x-10 text-content-2 lg:text-sm font-semibold text-white">
         <a
           *ngFor="let item of browserRoutes"
           [ngClass]="{'text-yellow-utpl': currentRoute.includes( '/radio-utpl' + item.route.replace('.', ''))}"
@@ -55,7 +55,7 @@
     </div> -->
 
     <!-- Inicio de sesion -->
-    <div class="col-span-1 flex justify-center items-center">
+    <div class="col-span-1 flex justify-center items-center text-content-3">
       <a *ngIf="!logged" class="w-[45%] grid justify-center" routerLink="./autenticacion">
         <svg width="49" height="49" viewBox="0 0 51 48" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M29.8413 11.6579C28.739 10.4678 27.1995 9.8125 25.5003 9.8125C23.792 9.8125 22.2475 10.4639 21.1503 11.6465C20.0413 12.8422 19.5009 14.4672 19.6278 16.222C19.8793 19.6838 22.5137 22.5 25.5003 22.5C28.487 22.5 31.1168 19.6844 31.3723 16.2231C31.5008 14.4842 30.9571 12.8626 29.8413 11.6579ZM35.4691 35.1875H15.5316C15.2706 35.1909 15.0122 35.1361 14.7751 35.027C14.538 34.918 14.3281 34.7574 14.1609 34.5571C13.7927 34.117 13.6443 33.516 13.7542 32.9083C14.2322 30.2564 15.7242 28.0287 18.0691 26.4648C20.1523 25.0766 22.7912 24.3125 25.5003 24.3125C28.2094 24.3125 30.8483 25.0771 32.9316 26.4648C35.2765 28.0281 36.7684 30.2558 37.2465 32.9077C37.3563 33.5155 37.2079 34.1164 36.8398 34.5565C36.6726 34.757 36.4628 34.9176 36.2257 35.0268C35.9885 35.1359 35.7301 35.1908 35.4691 35.1875Z" fill="white"/>
@@ -65,7 +65,7 @@
       </a>
 
       <button
-      class=" w-[45%] p-2 text-xs text-white border-2 border-white rounded-full hover:text-yellow-utpl transition duration-300 ease-in-out"
+      class=" w-[45%] p-2 text-white border-2 border-white rounded-full hover:text-yellow-utpl transition duration-300 ease-in-out"
         *ngIf="logged == true"
         (click)="logout()"
       >CERRAR SESIÓN</button>
