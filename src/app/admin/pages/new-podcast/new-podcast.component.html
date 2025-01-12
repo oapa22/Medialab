@@ -33,7 +33,7 @@
     <!-- Form para crear o actualizar Projecto-->
     <form class="w-full grid" [formGroup]="podcastForm">
       <!-- Seccion Fecha Actual -->
-      <div class="flex justify-center mt-10 mb-4">
+      <div class="flex justify-center mt-10 mb-4 text-content-1">
         <p *ngIf="this.currentRoute.includes('nuevo')"><strong>Fecha de publicación:</strong> {{date}}</p>
         <p *ngIf="this.currentRoute.includes('editar')"><strong>Fecha de publicación:</strong> {{dateN}}</p>
       </div>
@@ -41,27 +41,27 @@
       <!-- Seccion del Titulo -->
       <div>
         <div class="pb-2 text-wrap">
-          <p class="text-base"> <strong>Titulo de referencia </strong><span class="text-xs text-[#9D9D9D]">Este título no se visualiza en el podcast, solo es para mantener una organización el el administrador</span></p>
+          <p class="text-content-1"> <strong>Titulo de referencia </strong><span class="text-content-2 text-[#9D9D9D]">Este título no se visualiza en el podcast, solo es para mantener una organización el el administrador</span></p>
         </div>
 
         <input type="text" formControlName="title"
-          class="w-full h-[33px] px-3 border-2 border-[#C4C4C4] rounded-md"
+          class="w-full h-[33px] text-content-1 px-3 border-2 border-[#C4C4C4] rounded-md"
         >
       </div>
 
       <!-- Seccion Iframe -->
       <div class="my-8">
         <div class="pb-2 text-wrap">
-          <p class="text-base"> <strong>Insertar iFrame de Spotify </strong><span class="text-xs text-[#9D9D9D]">Tomar en consideración que la dimensión del width="300" height="152"</span></p>
+          <p class="text-content-1"> <strong>Insertar iFrame de Spotify </strong><span class="text-content-2 text-[#9D9D9D]">Tomar en consideración que la dimensión del width="300" height="152"</span></p>
         </div>
 
         <textarea name="frame" id="frame" formControlName="frame"
-          class="w-full h-[90px] px-3 py-1 border-2 border-[#C4C4C4] rounded-md"
+          class="w-full h-[90px] px-3 py-1 text-content-1 border-2 border-[#C4C4C4] rounded-md"
         ></textarea>
       </div>
 
       <!-- Botones para crear o actualizar un podcast -->
-      <div class="w-full flex justify-center">
+      <div class="w-full flex justify-center text-content-1">
         <button
         *ngIf="this.currentRoute.includes('nuevo')"
           class="p-2 text-white bg-[#00ACC1] rounded-lg hover:bg-blue-utpl"

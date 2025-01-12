@@ -10,7 +10,7 @@
 
     <div class="">
 
-      <div class="w-full mb-10 grid grid-cols-3 justify-between" *ngIf="this.projects.length > 0">
+      <div class="w-full mb-10 grid grid-cols-2 lg:grid-cols-3 justify-between" *ngIf="this.projects.length > 0">
 
         <div class="col-span-1 w-[90%] mx-auto my-4" *ngFor="let project of projects">
           <shared-card-project [project]="project"></shared-card-project>

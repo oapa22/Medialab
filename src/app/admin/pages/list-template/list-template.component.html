@@ -1,10 +1,10 @@
 
 
-<div class="w-full my-5 flex flex-col items-center">
+<div class="w-full my-5 flex flex-col items-center text-content-3">
     <button
       *ngIf="this.valueLabel != 'usuario'"
       (click)="this.navigateToSection()"
-      class="w-[194px] my-10 px-5 py-3 bg-blue-utpl font-semibold text-xs text-white  rounded-3xl border-white border-2 shadow-lg  hover:text-yellow-utpl transition duration-300">
+      class="w-[25%] sm:w-[20%] my-10 px-5 py-3 bg-blue-utpl font-semibold  text-white  rounded-3xl border-white border-2 shadow-lg  hover:text-yellow-utpl transition duration-300">
         {{ 'Crear ' + this.valueLabel| uppercase}}
     </button>
 
@@ -28,7 +28,9 @@
 
   <!-- paginacion -->
   <div class="mt-5">
+
     <shared-pagination  path='podcast' [numberDocsShow]=4 (podcastEmitter)="this.getPodcasts($event)"></shared-pagination>
+
   </div>
 </div>
 

@@ -43,11 +43,8 @@ export class CardTemplateComponent implements OnInit{
   ngOnInit(): void {
     this.route =  this.paramRoute + '/'+this.id;
     this.firestore.getDocUS<User>('user', this.id).subscribe((user) => {
-      console.log('user1',this.id)
-      console.log(user)
       if (user) {
         this.isAdmin = user.isAdmin ?? false;
-        console.log('user2',this.isAdmin)
       }
     });
   }

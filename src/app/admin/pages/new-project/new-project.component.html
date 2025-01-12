@@ -44,7 +44,7 @@
 
 <div class="w-full">
   <div class="w-[90%] mx-auto">
-    
+
     <div class="w-full flex items-center justify-between">
       <!-- Retroceder -->
       <button class="flex my-5 p-2 items-center rounded-full hover:bg-yellow-utpl transition duration-300 ease-in-out" routerLink="/radio-utpl/admin/lista-proyectos">
@@ -58,7 +58,7 @@
     <form class="w-full grid" [formGroup]="projectForm">
 
       <!-- Seccion Fecha Actual -->
-      <div class="flex justify-center mt-10 mb-4">
+      <div class="flex justify-center text-content-1 mt-10 mb-4">
         <p *ngIf="this.currentRoute.includes('nuevo')"><strong>Fecha de publicación:</strong> {{date}}</p>
         <p *ngIf="this.currentRoute.includes('editar')"><strong>Fecha de publicación:</strong> {{dateN}}</p>
       </div>
@@ -66,29 +66,29 @@
       <!-- Seccion del Titulo -->
       <div>
         <div class="pb-2 text-wrap">
-          <p class="text-base"> <strong>Titulo de referencia </strong><span class="text-xs text-[#9D9D9D]">Este título no se visualiza en el podcast, solo es para mantener una organización el el administrador</span></p>
+          <p class="text-content-1"> <strong>Titulo de referencia </strong><span class="text-content-2 text-[#9D9D9D]">Este título no se visualiza en el podcast, solo es para mantener una organización el el administrador</span></p>
         </div>
 
         <input type="text" formControlName="title"
-          class="w-full h-[33px] pl-3 border-2 border-[#C4C4C4] rounded-md"
+          class="w-full h-[33px] text-content-1 pl-3 border-2 border-[#C4C4C4] rounded-md"
         >
       </div>
 
       <!-- Seccion de palabras claves -->
       <div class="my-6">
         <div class="pb-2 text-wrap">
-          <p class="text-base"> <strong>Palabras claves</strong> </p>
+          <p class="text-content-1"> <strong>Palabras claves</strong> </p>
         </div>
 
         <input type="text" formControlName="keywords"
-          class="w-full h-[33px] pl-3 border-2 border-[#C4C4C4] rounded-md"
+          class="w-full h-[33px] text-content-1 pl-3 border-2 border-[#C4C4C4] rounded-md"
         >
       </div>
 
       <!-- Seccion seleccionar imagen -->
       <div class="mb-6">
         <div class="pb-2 text-wrap">
-          <p class="text-base"> <strong>Imagen de portada </strong><span class="text-xs text-[#9D9D9D]">La dimensión de la imagen debe ser de width="300px" height="200px"</span></p>
+          <p class="text-content-1"> <strong>Imagen de portada </strong><span class="text-content-2 text-[#9D9D9D]">La dimensión de la imagen debe ser de width="300px" height="200px"</span></p>
         </div>
 
         <!-- <div class="w-full h-[59px] flex items-center">
@@ -102,7 +102,7 @@
           </div>
         </div> -->
 
-        <div class="w-full h-[59px] flex items-center">
+        <div class="w-full h-[59px] flex items-center text-content-1">
           <input #fileImageInput type="file" class="hidden imagenSelec" (change)="selectImage($event)">
           <button
             class="w-[20%] h-full bg-[#EAEAEA] hover:bg-slate-400 transition duration-300 border-2 border-[black]"
@@ -121,19 +121,19 @@
       <!-- Seccion Resumen -->
       <div class="mb-6">
         <div class="pb-2 text-wrap">
-          <p class="text-base"> <strong>Resumen </strong><span class="text-xs text-[#9D9D9D]">Debe contener de entre 15 y 20 palabras</span></p>
+          <p class="text-content-1"> <strong>Resumen </strong><span class="text-content-2 text-[#9D9D9D]">Debe contener de entre 15 y 20 palabras</span></p>
         </div>
 
         <textarea name="frame" id="frame" formControlName="summary"
-          class="w-full h-[90px] px-3 py-1 border-2 border-[#C4C4C4] rounded-md"
+          class="w-full text-content-1 h-[90px] px-3 py-1 border-2 border-[#C4C4C4] rounded-md"
         ></textarea>
       </div>
 
       <!-- TODO: colocar seccion de contenido -->
       <div>
         <div class="pb-2 text-wrap">
-          <p class="text-base"> <strong>Contenido </strong><span class="text-xs text-[#9D9D9D]">Contenido de la publicación</span></p>
-          <editor formControlName="content" apiKey="872f9ypxuxkrilox9gkrtlhqjsbr861dppp3ocwzkipdfkz0"
+          <p class="text-content-1"> <strong>Contenido </strong><span class="text-content-2 text-[#9D9D9D]">Contenido de la publicación</span></p>
+          <editor formControlName="content" class="text-content-1" apiKey="872f9ypxuxkrilox9gkrtlhqjsbr861dppp3ocwzkipdfkz0"
           [init]="{
                   base_url: '/tinymce',
                   suffix: '.min',
@@ -144,7 +144,7 @@
       </div>
 
       <!-- Botones para crear o actualizar un Projecto -->
-      <div class="w-full flex justify-center">
+      <div class="w-full flex justify-center text-content-1">
         <button
           *ngIf="this.currentRoute.includes('nuevo')"
           class="p-2 text-white bg-[#00ACC1] rounded-lg hover:bg-blue-utpl"

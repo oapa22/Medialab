@@ -4,6 +4,7 @@ import { FirestoreService } from './../../../radio/services/firebase.service';
 import { User } from '../../../shared/interfaces/user.interface';
 import { Router } from '@angular/router';
 import { Timestamp } from '@angular/fire/firestore';
+import { CounterDocService } from '../../../shared/services/counter-doc.service';
 
 @Component({
     selector: 'auth-login-page',
@@ -27,6 +28,7 @@ export class LoginPageComponent {
   constructor(
     private firestore: FirestoreService,
     private auth: AuthServiceService,
+    private counterService:CounterDocService,
     private router: Router){
   }
 
@@ -78,6 +80,7 @@ export class LoginPageComponent {
             date: Timestamp.now()
           }
           await this.firestore.createDoc(newUser, 'user', uid);
+          this.counterService.incrementCounter('user');
           console.log('Usuario creado:', newUser);
         } else {
           console.log('Usuario ya registrado:', userDoc);
@@ -116,6 +119,7 @@ export class LoginPageComponent {
             date: Timestamp.now()
           };
           await this.firestore.createDoc(newUser, 'user', uid);
+          this.counterService.incrementCounter('user');
           console.log('Usuario creado:', newUser);
         } else {
           console.log('Usuario ya registrado:', userDoc);

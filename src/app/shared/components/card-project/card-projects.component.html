@@ -1,7 +1,7 @@
 <!-- Tarjeta de presentacion del proyecto -->
 <div class="w-full h-full rounded-xl p-4 boxShadow text-wrap animate-fadeIn" [ngStyle]="{display: hasLoaded? '' : 'none'}">
   <!-- Titulo del mensaje -->
-  <div class="text-xl text-center text-blue-utpl">
+  <div class="text-title-2 text-center text-blue-utpl">
     <p> <strong>{{this.project.title}}</strong></p>
   </div>
 
@@ -11,7 +11,7 @@
   </div>
 
   <!-- Contenido -->
-  <div class="mb-10 text-sm">
+  <div class="mb-10 text-content-2">
     <p class="font-semibold text-yellow-utpl mb-3"> {{this.date}} </p>
 
     <p class="text-blue-utpl">{{this.project.summary}}</p>
@@ -21,7 +21,7 @@
   <div class="w-full" >
     <a
       [routerLink]="['./contenido/',project.id]"
-      class="w-[40%] px-5 py-1 mb-3 text-center text-xs font-semibold rounded-3xl border-2 border-blue-utpl hover:bg-blue-utpl hover:text-white shadow-lg">
+      class="w-[40%] px-5 py-1 mb-3 text-center text-content-2 font-semibold rounded-3xl border-2 border-blue-utpl hover:bg-blue-utpl hover:text-white shadow-lg">
         Leer más..
     </a>
   </div>
