@@ -118,5 +118,6 @@ export class ResquestLoaderRenderService {
 
   public closeRequestLoader(overlay:HTMLElement){
     this.renderer.removeChild(document.body, overlay);
+    window.location.reload();
   }
 }

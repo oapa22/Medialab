@@ -60,40 +60,64 @@ export class CardTemplateComponent implements OnInit{
     this.hasLoaded = true;
   }
 
-  public onDeleteElement():void{
-    let request:boolean = false;
-    let title:string = '¿Desea eliminar este '+ this.paramRoute + '?' ;
-    let description:string = 'Si acepta el proceso será irreversible y se eliminará el '+ this.paramRoute+' de la base de datos.';
+  // public onDeleteElement():void{
+  //   let request:boolean = false;
+  //   let title:string = '¿Desea eliminar este '+ this.paramRoute + '?' ;
+  //   let description:string = 'Si acepta el proceso será irreversible y se eliminará el '+ this.paramRoute+' de la base de datos.';
 
+  //   this.confirmDialog.openConfirmDialog(title, description).then((confirmed) => {
+  //     if(confirmed){
+  //       this.firestore.deleteDoc(this.path,this.id)
+  //       let title:string = this.paramRoute.toUpperCase() + ' ELIMINADO';
+  //       let description:string = 'Espere un momento mientras los datos son removidos de la nube.';
+  //       this.requestLoader.initRequestLoader(title,description);
+
+  //       // Decrementar el contador
+  //       this.counterService.decrementCounter(this.path).then( (res) => {
+  //         window.location.reload();
+  //         // console.log('Se ha decrementador el contador de ', this.path);
+  //       }).catch((error) => {
+  //         console.error('Error al actualizar el mensaje:', error);
+  //       });
+  //     }
+  //   });
+
+  //   // dialogRef.afterClosed()
+  //   //   .pipe(
+  //   //     // filter((result:boolean) => result),
+  //   //     // switchMap(() => this.firestoreService.deleteDoc(paramRoute,id)),
+  //   //     // filter((wasDeleted:boolean) => wasDeleted)
+  //   //   )
+  //   //   .subscribe(() => {
+  //   //     console.log('se eejcuto el confirmdialog');
+  //   //     // this.router.navigate(['/heroes']);
+  //   //   });
+  // }
+
+  public onDeleteElement(): void {
+    const title: string = '¿Desea eliminar este ' + this.paramRoute + '?';
+    const description: string = 'Si acepta el proceso será irreversible y se eliminará el ' + this.paramRoute + ' de la base de datos.';
+  
     this.confirmDialog.openConfirmDialog(title, description).then((confirmed) => {
-      if(confirmed){
-        this.firestore.deleteDoc(this.path,this.id)
-        let title:string = this.paramRoute.toUpperCase() + ' ELIMINADO';
-        let description:string = 'Espere un momento mientras los datos son removidos de la nube.';
-        this.requestLoader.initRequestLoader(title,description);
-
-        // Decrementar el contador
-        this.counterService.decrementCounter(this.path).then( (res) => {
-          window.location.reload();
-          // console.log('Se ha decrementador el contador de ', this.path);
+      if (confirmed) {
+        this.requestLoader.initRequestLoader(
+          `${this.paramRoute.toUpperCase()} ELIMINADO`,
+          'Espere un momento mientras los datos son removidos de la nube.'
+        );
+  
+        this.firestore.deleteDoc(this.path, this.id).then(() => {
+          this.counterService.decrementCounter(this.path)
+            .catch((error) => {
+              console.error('Error al actualizar el contador:', error);
+            });
         }).catch((error) => {
-          console.error('Error al actualizar el mensaje:', error);
+          console.error('Error al eliminar el documento:', error);
         });
       }
     });
-
-    // dialogRef.afterClosed()
-    //   .pipe(
-    //     // filter((result:boolean) => result),
-    //     // switchMap(() => this.firestoreService.deleteDoc(paramRoute,id)),
-    //     // filter((wasDeleted:boolean) => wasDeleted)
-    //   )
-    //   .subscribe(() => {
-    //     console.log('se eejcuto el confirmdialog');
-    //     // this.router.navigate(['/heroes']);
-    //   });
   }
 
+  
   public toggleAdmin(event: any): void {
     const isAdmin = event.target.checked; // Capturamos el estado del checkbox.
 
