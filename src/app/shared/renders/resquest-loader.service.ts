@@ -111,7 +111,7 @@ export class ResquestLoaderRenderService {
         this.closeRequestLoader(overlay);
       });
 
-    }, 3000);
+    }, 4000);
 
 
   }
