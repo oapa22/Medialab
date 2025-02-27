@@ -5,11 +5,13 @@ import { NewProjectComponent } from './pages/new-project/new-project.component';
 import { NewPodcastComponent } from './pages/new-podcast/new-podcast.component';
 import { NewMessageComponent } from './pages/new-message/new-message.component';
 import { ListTemplateComponent } from './pages/list-template/list-template.component';
+import { adminGuard } from '../auth/guards/admin.guard';
 
 
 const routes: Routes = [
   {
     path: '',
+    canMatch: [adminGuard],
     component: LayoutPageComponent,
     children: [
       {path: 'lista-podcasts', component: ListTemplateComponent},

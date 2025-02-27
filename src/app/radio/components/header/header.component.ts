@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { BrowserRoute } from '../../interfaces/browser-route';
 import { FirestoreService } from '../../services/firebase.service';
 import { AuthServiceService } from '../../../auth/services/auth.service';
+import { Router } from '@angular/router';
 import { User } from '../../../shared/interfaces/user.interface';
 import { Timestamp } from '@angular/fire/firestore';
 
@@ -27,6 +28,7 @@ export class HeaderComponent implements OnInit{
 
   constructor(
     private firestore:FirestoreService,
+        private router:Router,
     private auth: AuthServiceService,
   ){}
 
@@ -60,8 +62,9 @@ export class HeaderComponent implements OnInit{
     });
   }
 
-  logout(){
-    this.auth.logout();
+  async logout(){
+    await this.auth.logout();
+    await this.router.navigate(['radio-utpl/inicio']);
     window.location.reload();
   }
 
