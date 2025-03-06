@@ -37,7 +37,7 @@
           <radio-section-schedule></radio-section-schedule>
         </div>
 
-        <!-- Seccion proyectos -->
+        <!-- Seccion proyectos (los proyectos fueron renombrados a noticias) -->
         <div class="my-10">
           <div class="flex items-end justify-end mr-16 mb-10 text-white text-2xl">
             <!-- Flecha apuntando a la izquierda -->
@@ -46,7 +46,7 @@
             </svg>
 
             <h2>
-              <p><strong>{{'Proyectos' | uppercase}}</strong></p>
+              <p><strong>{{'Noticias' | uppercase}}</strong></p>
             </h2>
           </div>
 
@@ -60,13 +60,13 @@
 
               <div class="h-full p-2 flex flex-col justify-between">
                 <p class="font-semibold text-yellow-utpl"> {{this.date[0]}} </p>
-                <p class="font-bold text-white">{{this.projects[0].title | truncate:65}}</p>
+                <p class="font-bold text-white">{{this.projects[0].title | truncate:105}}</p>
                 <p class="text-white">{{this.projects[0].summary | truncate:120}}</p>
 
                 <div>
                   <a
                     class="w-[40%] px-5 py-1 mb-3 text-center text-xs font-semibold rounded-3xl bg-white border-2 border-white hover:bg-blue-utpl hover:text-yellow-utpl shadow-lg"
-                    routerLink='../proyectos/contenido/{{this.projects[0].id}}'
+                    routerLink='../noticias/contenido/{{this.projects[0].id}}'
                   >Leer más..</a>
                 </div>
               </div>
@@ -75,40 +75,40 @@
             <!-- Segunda Columna: Proyecto 1 y 2 -->
             <div class="w-full flex flex-col space-y-5 justify-between">
               <!-- Segundo Proyecto -->
-              <div class="h-[150px] lg:h-[180px] flex">
+              <div class="h-[150px] lg:h-[180px] flex" *ngIf="this.projects.length > 1">
                 <div class="w-[50%]">
                   <img class="w-full h-full rounded-md object-cover" [src]="this.projects[1].photo_url" alt="">
                 </div>
 
                 <div class="w-[50%] pl-2 py-2 flex flex-col justify-between">
                   <p class="font-semibold text-yellow-utpl"> {{this.date[1]}} </p>
-                  <p class="font-bold text-white">{{this.projects[1].title | truncate:65}}</p>
+                  <p class="font-bold text-white">{{this.projects[1].title | truncate:85}}</p>
                   <p class="text-white">{{this.projects[1].summary | truncate:80}}</p>
 
                   <div>
                     <a
                       class="w-[40%] px-5 py-1 text-center text-xs font-semibold rounded-3xl bg-white border-2 border-white hover:bg-blue-utpl hover:text-yellow-utpl shadow-lg"
-                      routerLink='../proyectos/contenido/{{this.projects[1].id}}'
+                      routerLink='../noticias/contenido/{{this.projects[1].id}}'
                     >Leer más..</a>
                   </div>
                 </div>
               </div>
 
               <!-- Tercer Proyecto -->
-              <div class="h-[150px] lg:h-[180px] flex">
+              <div class="h-[150px] lg:h-[180px] flex" *ngIf="this.projects.length > 2">
                 <div class="w-[50%]">
                   <img class="w-full h-full rounded-md object-cover" [src]="this.projects[2].photo_url" alt="">
                 </div>
 
                 <div class="w-[50%] pl-2 py-2 flex flex-col justify-between">
                   <p class="font-semibold text-yellow-utpl"> {{this.date[2]}} </p>
-                  <p class="font-bold text-white">{{this.projects[2].title | truncate:65}}</p>
+                  <p class="font-bold text-white">{{this.projects[2].title | truncate:85}}</p>
                   <p class="text-white">{{this.projects[2].summary | truncate:65}}</p>
 
                   <div>
                     <a
                       class="w-[40%] px-5 py-1 text-center text-xs font-semibold rounded-3xl bg-white border-2 border-white hover:bg-blue-utpl hover:text-yellow-utpl shadow-lg"
-                      routerLink='../proyectos/contenido/{{this.projects[2].id}}'
+                      routerLink='../noticias/contenido/{{this.projects[2].id}}'
                     >Leer más..</a>
                   </div>
                 </div>

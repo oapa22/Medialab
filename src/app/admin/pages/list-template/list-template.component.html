@@ -35,7 +35,7 @@
 </div>
 
 <!-- Projects -->
-<div *ngIf="this.valueLabel == 'proyecto'">
+<div *ngIf="this.valueLabel == 'noticia'">
   <div class="py-2" *ngFor="let project of this.projects">
     <admin-card-template
       [imageSrc]="project.photo_url"
@@ -43,7 +43,7 @@
       [date]="formatDate(project.date)"
       [summary]="project.summary"
       id={{project.id}}
-      paramRoute="proyecto"
+      paramRoute="noticia"
       path="project">
     </admin-card-template>
   </div>

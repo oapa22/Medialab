@@ -32,11 +32,11 @@ export class ListTemplateComponent implements OnInit{
         //   this.podcasts = res;
         // });
         this.valueLabel = 'podcast';
-      } else if (this.router.url.includes('lista-proyectos')) {
+      } else if (this.router.url.includes('lista-noticias')) {
         // this.fireStoreService.getCollection<Project>('project').subscribe(res => {
         //   this.projects = res;
         // });
-        this.valueLabel = 'proyecto';
+        this.valueLabel = 'noticia';
       } else if (this.router.url.includes('lista-mensajes')) {
         // this.fireStoreService.getCollection<Message>('message').subscribe(res => {
         //   this.messages = res;

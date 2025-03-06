@@ -60,7 +60,7 @@ export class NewProjectComponent implements OnInit{
   ngOnInit(): void {
     this.formatDate();
     this.currentRoute = this.router.url;
-    if(this.router.url.includes('editar-proyecto')){
+    if(this.router.url.includes('editar-noticia')){
       this.activatedRoute.params.pipe(
         switchMap(({id}) => this.firestore.getDocProject<Project>('project',id))
       ).subscribe(project => {
@@ -149,31 +149,38 @@ export class NewProjectComponent implements OnInit{
   }
 
   createProject() {
-    this.project.summary = this.currentProjectFormValue.summary;
-    const wordCount = this.project.summary.trim().split(/\s+/).length;
-
-    if (wordCount < 15 || wordCount > 20) {
+    if (!this.currentProjectFormValue.summary) {
       this.summaryError = true;
       return;
+    }
+    this.project.summary = this.currentProjectFormValue.summary.trim();
+    const wordCount = this.project.summary.split(/\s+/).filter(word => word.length > 0).length;  
+
+    console.log('Texto:', this.project.summary);
+    console.log('Número de palabras:', wordCount);
+
+    if (wordCount < 15 || wordCount > 20) {
+      console.log('no entrar')
+      this.summaryError = true;
+      console.log(this.project.summary)
+      console.log(wordCount)
     } else {
+      console.log('entrar')
       this.summaryError = false;
     }
-
     if (this.currentRoute.includes('nuevo')) {
-      let title:string = 'CREANDO PROYECTO';
+      let title:string = 'CREANDO NOTICIA';
       let description:string = 'Espere un momento mientras los datos se suben a la nube.';
       this.requestLoader.initRequestLoader(title,description);
     } else {
-      let title:string = 'ACTUALIZANDO PROYECTO';
+      let title:string = 'ACTUALIZANDO NOTICIA';
       let description:string = 'Espere un momento mientras los datos se actualizan a la nube.';
       this.requestLoader.initRequestLoader(title,description);
     }
-
     if (this.selectedFile) {
       const filePath = `images_project/${this.selectedFile.name}`;
       const fileRef = this.storage.ref(filePath);
       const task = this.storage.upload(filePath, this.selectedFile);
-
       task.snapshotChanges().toPromise().then(() => {
         fileRef.getDownloadURL().toPromise().then(url => {
           this.project.photo_url = url;
@@ -205,7 +212,7 @@ export class NewProjectComponent implements OnInit{
         this.counterService.incrementCounter('project').then( (res) => {
           // console.log('Se incremento el contador project');
         }).catch((error) => {
-          console.error('Error al actualizar el mensaje:', error);
+          console.error('Error al actualizar la noticia:', error);
         });
       }).catch(error => console.log('Error creating document', error));
     } else {
@@ -215,7 +222,7 @@ export class NewProjectComponent implements OnInit{
         this.firestore.updateDoc(path, id, this.project).then((res) => {
           console.log('res->',res)
         }).catch((error) => {
-          console.error('Error al actualizar el mensaje:', error);
+          console.error('Error al actualizar la noticia:', error);
         });
       }
     }

@@ -28,7 +28,7 @@ export class ElementRadioComponent implements AfterViewInit,OnInit{
   constructor(private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
-    this.audioElement = new Audio('La Muralla Verde (Official Audio).mp3'); // URL del stream de audio
+    this.audioElement = new Audio('https://streaming.radioestacion4.com/8104/stream'); // URL del stream de audio
     this.audioElement.crossOrigin = 'anonymous';
     this.audioContext = new AudioContext();
     this.analyser = this.audioContext.createAnalyser();

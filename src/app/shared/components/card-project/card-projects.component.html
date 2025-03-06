@@ -1,33 +1,31 @@
-<!-- Tarjeta de presentacion del proyecto -->
-<div class="w-full h-full rounded-xl p-4 boxShadow text-wrap animate-fadeIn" [ngStyle]="{display: hasLoaded? '' : 'none'}">
-  <!-- Titulo del mensaje -->
-  <div class="text-title-2 text-center text-blue-utpl">
-    <p> <strong>{{this.project.title}}</strong></p>
+<!-- Tarjeta de presentación del proyecto -->
+<div class="w-full h-full rounded-xl p-4 boxShadow text-wrap animate-fadeIn flex flex-col justify-between" [ngStyle]="{display: hasLoaded? '' : 'none'}">
+  <!-- Título del mensaje -->
+  <div class="text-title-2 text-center text-blue-utpl h-[55px]">
+    <p><strong>{{this.project.title | truncate:85}}</strong></p>
   </div>
 
-  <!-- Imagen de protada -->
+  <!-- Imagen de portada -->
   <div class="w-full my-3">
-    <img class="w-full h-full object-cover rounded-md" (load)="onLoad()" [src]="this.project.photo_url" alt="">
+    <img class="w-full h-[200px] object-cover rounded-md" (load)="onLoad()" [src]="this.project.photo_url" alt="">
   </div>
 
   <!-- Contenido -->
-  <div class="mb-10 text-content-2">
-    <p class="font-semibold text-yellow-utpl mb-3"> {{this.date}} </p>
-
-    <p class="text-blue-utpl">{{this.project.summary}}</p>
+  <div class="flex-grow">
+    <p class="font-semibold text-yellow-utpl mb-3">{{this.date}}</p>
+    <p class="text-blue-utpl overflow-hidden">{{this.project.summary | truncate:115}}</p>
   </div>
 
   <!-- Enlace para redireccionar -->
-  <div class="w-full" >
+  <div class="mt-auto flex">
     <a
       [routerLink]="['./contenido/',project.id]"
-      class="w-[40%] px-5 py-1 mb-3 text-center text-content-2 font-semibold rounded-3xl border-2 border-blue-utpl hover:bg-blue-utpl hover:text-white shadow-lg">
-        Leer más..
+      class="w-[40%] px-5 py-2 text-center text-content-2 font-semibold rounded-3xl border-2 border-blue-utpl hover:bg-blue-utpl hover:text-white shadow-lg">
+      Leer más..
     </a>
   </div>
-
-
 </div>
+
 
 <!-- Spinner empleado para la carga del elemento -->
 <div class=" w-full h-[200px] flex items-center justify-center" *ngIf="!hasLoaded">

@@ -1,3 +1,4 @@
+import { RadioModule } from './../radio/radio.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Error404PageComponent } from './pages/error-404-page/error-404-page.component';
@@ -9,7 +10,7 @@ import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dial
 import { MaterialModule } from '../material_module/material.module';
 import { ResquestLoaderComponent } from './renders/resquest-loader/resquest-loader.component';
 import { PaginationComponent } from './components/pagination/pagination.component';
-
+import { TruncatePipe } from './pipes/truncate.pipe';
 
 @NgModule({
   declarations: [
@@ -19,12 +20,11 @@ import { PaginationComponent } from './components/pagination/pagination.componen
     ConfirmDialogComponent,
     ResquestLoaderComponent,
     PaginationComponent,
-
+    TruncatePipe
   ],
   imports: [
     CommonModule,
     SharedRoutingModule,
-
     MaterialModule
   ],
   exports: [

@@ -18,8 +18,8 @@ export class LayoutPageComponent implements OnInit{
   ngOnInit(): void {
     if (this.router.url.includes('lista-podcasts')) {
       this.valueLabel = 'podcast';
-    } else if (this.router.url.includes('lista-proyectos')) {
-      this.valueLabel = 'proyecto';
+    } else if (this.router.url.includes('lista-noticias')) {
+      this.valueLabel = 'noticia';
     } else if (this.router.url.includes('lista-mensajes')) {
       this.valueLabel = 'mensaje';
     } else if(this.router.url.includes('lista-usuarios')){
@@ -32,7 +32,7 @@ export class LayoutPageComponent implements OnInit{
 
 
   //Funcion para cambiar el valor del contenido del boton.
-  public updateButtonLabel(valueLabel:'podcast'|'proyecto'|'mensaje'|'usuario'):void{
+  public updateButtonLabel(valueLabel:'podcast'|'noticia'|'mensaje'|'usuario'):void{
     this.valueLabel = valueLabel;
   }
 

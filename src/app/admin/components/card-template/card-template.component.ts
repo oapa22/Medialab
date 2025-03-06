@@ -24,7 +24,7 @@ export class CardTemplateComponent implements OnInit{
   @Input() public date:string = '';
   @Input() public summary:string = '';
   @Input() public id:string = '';
-  @Input() public paramRoute:'podcast' | 'proyecto' | 'mensaje' | 'usuario' |'' = '';
+  @Input() public paramRoute:'podcast' | 'noticia' | 'mensaje' | 'usuario' |'' = '';
   @Input() public path!: 'user'|'podcast'|'message'|'project';
 
   public route:string = '';
