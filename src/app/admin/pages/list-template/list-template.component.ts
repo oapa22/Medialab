@@ -48,14 +48,14 @@ export class ListTemplateComponent implements OnInit{
         // });
         this.valueLabel = 'usuario';
       } else {
-        this.router.navigate(['/radio-utpl/admin/']);
+        this.router.navigate(['admin/']);
 
       }
 
   }
 
   public navigateToSection(): void {
-    const valueLink = 'radio-utpl/admin/nuevo-' + this.valueLabel;
+    const valueLink = 'admin/nuevo-' + this.valueLabel;
     if (this.valueLabel) {
       console.log(valueLink);
       this.router.navigate([valueLink]);

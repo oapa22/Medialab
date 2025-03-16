@@ -24,7 +24,7 @@
     <nav class="col-span-3  sm:space-x-10 text-content-2 lg:text-sm font-semibold text-white">
         <a
           *ngFor="let item of browserRoutes"
-          [ngClass]="{'text-yellow-utpl': currentRoute.includes( '/radio-utpl' + item.route.replace('.', ''))}"
+          [ngClass]="{'text-yellow-utpl': currentRoute.includes( '' + item.route.replace('.', ''))}"
           href=""
           class="p-1 hover:text-yellow-utpl  transition duration-300 ease-in-out"
           [routerLink]=item.route
@@ -33,7 +33,7 @@
         </a>
 
         <a *ngIf="user?.isAdmin && logged"
-          [ngClass]="{'text-yellow-utpl': currentRoute.includes( '/radio-utpl/admin')}"
+          [ngClass]="{'text-yellow-utpl': currentRoute.includes( '/admin')}"
           href=""
           class="p-1 hover:text-yellow-utpl  transition duration-300 ease-in-out"
           routerLink="./admin"
@@ -43,7 +43,7 @@
     </nav>
 
     <!-- <div class="col-span-1 grid justify-center">
-      <a [routerLink]="['/radio-utpl/auth/login']" title="Iniciar sesión">
+      <a [routerLink]="['/auth/login']" title="Iniciar sesión">
         <svg width="50px" height="50px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <circle cx="12" cy="9" r="3" stroke="#fff" stroke-width="1.5"/>
           <circle cx="12" cy="12" r="10" stroke="#fff" stroke-width="1.5"/>

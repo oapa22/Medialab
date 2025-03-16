@@ -59,7 +59,7 @@ export class ProjectTemplateComponent implements OnInit{
       switchMap( ({id}) => this.firestoreService.getDocProject<Project>('project',id))
     ).subscribe(project => {
 
-      if (!project) return this.router.navigate(['/radio-utpl/proyectos/']);
+      if (!project) return this.router.navigate(['/proyectos/']);
 
       this.project = project;
       this.projectLikes = this.project;
@@ -82,7 +82,7 @@ export class ProjectTemplateComponent implements OnInit{
   toggleLike() {
     // Verifica si el usuario está autenticado
     if (!this.docId) {
-      this.router.navigate(['/radio-utpl/autenticacion']);
+      this.router.navigate(['/autenticacion']);
       return;
     }
 

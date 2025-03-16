@@ -18,7 +18,28 @@ export class HomePageComponent implements OnInit{
   public recentProjects: Project[] = [];
   public projects: Project[] = [];
   public projectPrueba: Project = {content:'',date:Timestamp.now(),keywords:'',photo_filename:'',photo_url:'',summary:'',title:'Prueba',likes:0,};
-
+  templateProject: Project = {
+    id: '1234',
+    title: 'Aún no hay más noticias',
+    date: Timestamp.now(),
+    keywords: 'template',
+    summary: 'Aquí se presentarán las nuevas noticias.',
+    photo_url: 'https://firebasestorage.googleapis.com/v0/b/radioutpl.appspot.com/o/media%2Ff2e5f5df-e778-45b9-a052-89e5d1a88934.jpg?alt=media&token=c9fc1092-3a06-4499-aa3c-781664c0bfc3',
+    photo_filename: 'f2e5f5df-e778-45b9-a052-89e5d1a88934.jpg',
+    content: 'content',
+    likes: 0,
+  }
+  templateProject2: Project = {
+    id: '1234',
+    title: 'Aún no hay más noticias',
+    date: Timestamp.now(),
+    keywords: 'template',
+    summary: 'Aquí se presentarán las nuevas noticias.',
+    photo_url: 'https://firebasestorage.googleapis.com/v0/b/radioutpl.appspot.com/o/media%2Ff2e5f5df-e778-45b9-a052-89e5d1a88934.jpg?alt=media&token=c9fc1092-3a06-4499-aa3c-781664c0bfc3',
+    photo_filename: 'f2e5f5df-e778-45b9-a052-89e5d1a88934.jpg',
+    content: 'content',
+    likes: 0,
+  }
   date: string[] = [];
 
   public recentProject1: Project | null = null;

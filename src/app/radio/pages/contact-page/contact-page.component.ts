@@ -53,7 +53,7 @@ export class ContactPageComponent implements OnInit{
   async sendEmail(){
     // Verifica si el usuario está autenticado
     if (!this.docId) {
-      this.router.navigate(['/radio-utpl/autenticacion']);
+      this.router.navigate(['/autenticacion']);
       return;
     }
 
@@ -67,6 +67,11 @@ export class ContactPageComponent implements OnInit{
       from_correo: this.user.email,
       subject: this.form.value.subject,
       message: this.form.value.message,
+    }).then(() => {
+      this.requestLoader.closeRequestLoader(); // Aquí pasamos una función anónima
+    }).catch((error) => {
+      console.error('Error al enviar el correo:', error);
+      this.requestLoader.closeRequestLoader(); // Cierra el loader en caso de error también
     });
     this.form.reset;
   }

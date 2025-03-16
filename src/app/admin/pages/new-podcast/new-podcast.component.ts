@@ -85,8 +85,10 @@ export class NewPodcastComponent implements OnInit {
 
       this.counterService.incrementCounter('podcast').then( (res) => {
         // console.log('Se incremento el contador podcast');
+        this.requestLoader.closeRequestLoader();
       }).catch((error) => {
         console.error('Error al actualizar el mensaje:', error);
+        this.requestLoader.closeRequestLoader();
       });
     });
   }
@@ -103,8 +105,10 @@ export class NewPodcastComponent implements OnInit {
       const id = this.podcast.id;
 
       this.firestore.updateDoc(path, id, updatedPodcast).then(() => {
+        this.requestLoader.closeRequestLoader();
       }).catch((error) => {
         console.error('Error al actualizar el podcast:', error);
+        this.requestLoader.closeRequestLoader();
       });
     }
   }

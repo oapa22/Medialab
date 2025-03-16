@@ -227,10 +227,12 @@ export class NewMessageComponent implements OnInit{
         console.log('respuesta ->', res);
 
         this.counterService.incrementCounter('message').then( (res) => {
-          // this.router.navigate(['radio-utpl/admin/lista-podcasts']);
+          // this.router.navigate(['admin/lista-podcasts']);
           // console.log('Se ha incrementado el contador de messages');
+          this.requestLoader.closeRequestLoader();
         }).catch((error) => {
           console.error('Error al actualizar el mensaje:', error);
+          this.requestLoader.closeRequestLoader();
         });
       }).catch(error => console.log('Error creating document', error));
     } else {
@@ -240,8 +242,10 @@ export class NewMessageComponent implements OnInit{
         const id = this.message.id;
         this.firestore.updateDoc(path, id, this.message).then((res) => {
           console.log('res->',res)
+          this.requestLoader.closeRequestLoader();
         }).catch((error) => {
           console.error('Error al actualizar el mensaje:', error);
+          this.requestLoader.closeRequestLoader();
         });
       }
     }

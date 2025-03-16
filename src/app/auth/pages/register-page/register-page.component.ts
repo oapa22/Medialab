@@ -56,7 +56,7 @@ export class RegisterPageComponent {
       this.user.date = Timestamp.now()
       this.firestore.createDoc(this.user, path, id)
       this.counterService.incrementCounter('user');
-      this.router.navigate(['radio-utpl/inicio'])
+      this.router.navigate(['inicio'])
     }
   }
 }

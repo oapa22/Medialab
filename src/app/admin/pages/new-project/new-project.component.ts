@@ -164,6 +164,7 @@ export class NewProjectComponent implements OnInit{
       this.summaryError = true;
       console.log(this.project.summary)
       console.log(wordCount)
+      return;
     } else {
       console.log('entrar')
       this.summaryError = false;
@@ -208,11 +209,13 @@ export class NewProjectComponent implements OnInit{
 
       this.firestore.createDoc(this.project, path, id).then(res => {
         console.log('respuesta ->', res);
-
+        
         this.counterService.incrementCounter('project').then( (res) => {
           // console.log('Se incremento el contador project');
+          this.requestLoader.closeRequestLoader();
         }).catch((error) => {
           console.error('Error al actualizar la noticia:', error);
+          this.requestLoader.closeRequestLoader();
         });
       }).catch(error => console.log('Error creating document', error));
     } else {
@@ -221,8 +224,10 @@ export class NewProjectComponent implements OnInit{
         const id = this.project.id;
         this.firestore.updateDoc(path, id, this.project).then((res) => {
           console.log('res->',res)
+          this.requestLoader.closeRequestLoader();
         }).catch((error) => {
           console.error('Error al actualizar la noticia:', error);
+          this.requestLoader.closeRequestLoader();
         });
       }
     }

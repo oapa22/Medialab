@@ -1,13 +1,20 @@
 import { Injectable, Renderer2, RendererFactory2 } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ResquestLoaderRenderService {
   private renderer: Renderer2;
+  private overlay!: HTMLElement;
+  private containerSpinner!: HTMLElement;
+  private tailSpinner!: HTMLElement;
+  private buttonSucces!: HTMLElement;
+  
 
-
-  public constructor(private rendererFactory: RendererFactory2) {
+  public constructor(private rendererFactory: RendererFactory2,
+    private router: Router
+  ) {
     this.renderer = this.rendererFactory.createRenderer(null, null);
   }
 
@@ -90,6 +97,11 @@ export class ResquestLoaderRenderService {
     this.renderer.appendChild(overlay,container);
     this.renderer.appendChild(document.body,overlay);
 
+    this.overlay = overlay;
+    this.containerSpinner = containerSpinner;
+    this.tailSpinner = tailSpinner;
+    this.buttonSucces = buttonSucces;
+
     this.loaderRequestLoader(overlay, containerSpinner, tailSpinner, buttonSucces);
   }
 
@@ -99,25 +111,26 @@ export class ResquestLoaderRenderService {
     this.renderer.addClass(checkSVG, 'absolute');
     this.renderer.addClass(checkSVG, 'animate-fadeIn');
 
-    setTimeout(() => {
-      this.renderer.removeChild(containerSpinner, tailSpinner);
-      this.renderer.appendChild(containerSpinner,checkSVG);
-      this.renderer.removeClass(buttonSucces,'bg-opacity-50');
-      this.renderer.addClass(buttonSucces, 'hover:text-black');
-      this.renderer.removeClass(buttonSucces,'cursor-default');
-      this.renderer.addClass(buttonSucces, 'cursor-pointer');
-
-      this.renderer.listen(buttonSucces, 'click', () => {
-        this.closeRequestLoader(overlay);
-      });
-
-    }, 4000);
-
-
   }
 
-  public closeRequestLoader(overlay:HTMLElement){
-    this.renderer.removeChild(document.body, overlay);
-    window.location.reload();
+  public closeRequestLoader() {
+    const checkSVG = this.renderer.createElement('img');
+    checkSVG.src = 'radio_media/check-svgrepo-com.svg';
+    this.renderer.addClass(checkSVG, 'absolute');
+    this.renderer.addClass(checkSVG, 'animate-fadeIn');
+  
+    this.renderer.removeChild(this.containerSpinner, this.tailSpinner);
+    this.renderer.appendChild(this.containerSpinner, checkSVG);
+    this.renderer.removeClass(this.buttonSucces, 'bg-opacity-50');
+    this.renderer.addClass(this.buttonSucces, 'hover:text-black');
+    this.renderer.removeClass(this.buttonSucces, 'cursor-default');
+    this.renderer.addClass(this.buttonSucces, 'cursor-pointer');
+  
+    this.renderer.listen(this.buttonSucces, 'click', () => {
+      this.renderer.removeChild(document.body, this.overlay);
+      window.location.reload();
+    });
   }
+  
+  
 }

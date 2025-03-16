@@ -50,7 +50,7 @@ export class CardTemplateComponent implements OnInit{
   }
 
   public naviagetToNewElement():void{
-    this.router.navigate(['radio-utpl/admin/editar-'+this.route]);
+    this.router.navigate(['admin/editar-'+this.route]);
   }
 
   public onLoad():void{
@@ -107,8 +107,10 @@ export class CardTemplateComponent implements OnInit{
             .catch((error) => {
               console.error('Error al actualizar el contador:', error);
             });
+            this.requestLoader.closeRequestLoader();
         }).catch((error) => {
           console.error('Error al eliminar el documento:', error);
+          this.requestLoader.closeRequestLoader();
         });
       }
     });

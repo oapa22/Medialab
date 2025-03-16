@@ -64,7 +64,7 @@ export class HeaderComponent implements OnInit{
 
   async logout(){
     await this.auth.logout();
-    await this.router.navigate(['radio-utpl/inicio']);
+    await this.router.navigate(['inicio']);
     window.location.reload();
   }
 

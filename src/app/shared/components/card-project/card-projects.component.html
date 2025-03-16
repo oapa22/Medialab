@@ -1,13 +1,16 @@
 <!-- Tarjeta de presentación del proyecto -->
 <div class="w-full h-full rounded-xl p-4 boxShadow text-wrap animate-fadeIn flex flex-col justify-between" [ngStyle]="{display: hasLoaded? '' : 'none'}">
-  <!-- Título del mensaje -->
-  <div class="text-title-2 text-center text-blue-utpl h-[55px]">
-    <p><strong>{{this.project.title | truncate:85}}</strong></p>
-  </div>
 
-  <!-- Imagen de portada -->
-  <div class="w-full my-3">
-    <img class="w-full h-[200px] object-cover rounded-md" (load)="onLoad()" [src]="this.project.photo_url" alt="">
+  <div class="mt-auto flex-col">
+    <!-- Título del proyecto -->
+    <div class="text-title-2 text-center text-blue-utpl min-h-[55px] md:min-h-[65px] text-sm md:text-base z-10 relative bg-white">
+      <p><strong>{{this.project.title | truncate:85}}</strong></p>
+    </div>
+
+    <!-- Imagen de portada -->
+    <div class="w-full">
+      <img class="w-full h-[200px] md:h-[300px] object-cover rounded-md" (load)="onLoad()" [src]="this.project.photo_url" alt="">
+    </div>
   </div>
 
   <!-- Contenido -->
@@ -26,8 +29,7 @@
   </div>
 </div>
 
-
 <!-- Spinner empleado para la carga del elemento -->
-<div class=" w-full h-[200px] flex items-center justify-center" *ngIf="!hasLoaded">
+<div class="w-full h-[200px] flex items-center justify-center" *ngIf="!hasLoaded">
   <img src="radio_media/loader.svg" alt="">
 </div>

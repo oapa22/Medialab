@@ -4,7 +4,7 @@ import { Error404PageComponent } from './shared/pages/error-404-page/error-404-p
 
 const routes: Routes = [
   {
-    path: 'radio-utpl',
+    path: '',
     loadChildren: () => import('./radio/radio.module').then(m => m.RadioModule)
   },
   {
@@ -13,7 +13,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'radio-utpl',
+    redirectTo: '',
     pathMatch: 'full'
   },
   {

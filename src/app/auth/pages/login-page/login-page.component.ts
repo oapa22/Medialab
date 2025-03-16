@@ -50,7 +50,7 @@ export class LoginPageComponent {
     const res = await this.auth.login(datos)
     if (res){
       console.log('res ->', res)
-      this.router.navigate(['radio-utpl/inicio'])
+      this.router.navigate(['inicio'])
     }
   }
 
@@ -86,7 +86,7 @@ export class LoginPageComponent {
           console.log('Usuario ya registrado:', userDoc);
         }
 
-        this.router.navigate(['radio-utpl/inicio']);
+        this.router.navigate(['inicio']);
       }
     } catch (error) {
       console.error('Error al iniciar sesión con Google:', error);
@@ -125,7 +125,7 @@ export class LoginPageComponent {
           console.log('Usuario ya registrado:', userDoc);
         }
 
-        this.router.navigate(['radio-utpl/inicio']);
+        this.router.navigate(['inicio']);
       }
     } catch (error) {
       console.error('Error al iniciar sesión con Microsoft:', error);

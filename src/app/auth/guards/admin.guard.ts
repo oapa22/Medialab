@@ -12,10 +12,10 @@ export const adminGuard: CanMatchFn = (route, segments): MaybeAsync<GuardResult>
   return inject(AuthServiceService).stateUser().pipe(
     switchMap(user => {
       if (!user) {
-        return of(router.createUrlTree(['radio-utpl/inicio']));
+        return of(router.createUrlTree(['inicio']));
       }
       return firestore.getDocProject<User>('user', user.uid).pipe(
-        map(res => res?.isAdmin ? true : router.createUrlTree(['radio-utpl/inicio']))
+        map(res => res?.isAdmin ? true : router.createUrlTree(['inicio']))
       );
     })
   );

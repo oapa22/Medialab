@@ -25,7 +25,7 @@ export class LayoutPageComponent implements OnInit{
     } else if(this.router.url.includes('lista-usuarios')){
       this.valueLabel = 'usuario';
     } else {
-      this.router.navigate(['/radio-utpl/admin/']);
+      this.router.navigate(['/admin/']);
     }
   }
 

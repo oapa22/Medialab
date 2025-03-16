@@ -23,7 +23,7 @@ export class LayoutPageComponent {
     }
 
   public navigateToSection():void{
-    const valueLink = 'radio-utpl/auth/'+ this.valueLabel;
+    const valueLink = 'auth/'+ this.valueLabel;
     if(this.valueLabel){
       console.log(valueLink);
       this.router.navigate([valueLink]);
