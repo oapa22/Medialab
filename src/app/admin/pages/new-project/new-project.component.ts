@@ -140,12 +140,47 @@ export class NewProjectComponent implements OnInit{
 
 
   selectImage(event: any): void {
-    this.selectedFile = event.target.files[0];
-    if (this.selectedFile) {
-      const reader = new FileReader();
-      reader.onload = e => this.imageSrc = reader.result;
-      reader.readAsDataURL(this.selectedFile);
+    const file = event.target.files[0];
+    if (file) {
+      this.convertToWebP(file).then((webpFile) => {
+        this.selectedFile = webpFile;
+        const reader = new FileReader();
+        reader.onload = e => this.imageSrc = reader.result;
+        reader.readAsDataURL(webpFile);
+        this.fileName = webpFile.name;
+      }).catch(error => console.log('Error converting to WebP:', error));
     }
+  }
+
+  convertToWebP(file: File): Promise<File> {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = (event) => {
+        const img = new Image();
+        img.src = event.target?.result as string;
+        img.onload = () => {
+          const canvas = document.createElement('canvas');
+          const ctx = canvas.getContext('2d');
+          if (!ctx) {
+            reject('Canvas context is not available');
+            return;
+          }
+          canvas.width = img.width;
+          canvas.height = img.height;
+          ctx.drawImage(img, 0, 0);
+          canvas.toBlob((blob) => {
+            if (blob) {
+              const webpFile = new File([blob], file.name.replace(/\.[^.]+$/, '.webp'), { type: 'image/webp' });
+              resolve(webpFile);
+            } else {
+              reject('Failed to create WebP file');
+            }
+          }, 'image/webp', 0.75);
+        };
+      };
+      reader.onerror = (error) => reject(error);
+    });
   }
 
   createProject() {
@@ -156,17 +191,10 @@ export class NewProjectComponent implements OnInit{
     this.project.summary = this.currentProjectFormValue.summary.trim();
     const wordCount = this.project.summary.split(/\s+/).filter(word => word.length > 0).length;  
 
-    console.log('Texto:', this.project.summary);
-    console.log('Número de palabras:', wordCount);
-
     if (wordCount < 15 || wordCount > 20) {
-      console.log('no entrar')
       this.summaryError = true;
-      console.log(this.project.summary)
-      console.log(wordCount)
       return;
     } else {
-      console.log('entrar')
       this.summaryError = false;
     }
     if (this.currentRoute.includes('nuevo')) {

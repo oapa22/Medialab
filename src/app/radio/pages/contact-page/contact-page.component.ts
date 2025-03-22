@@ -68,10 +68,10 @@ export class ContactPageComponent implements OnInit{
       subject: this.form.value.subject,
       message: this.form.value.message,
     }).then(() => {
-      this.requestLoader.closeRequestLoader(); // Aquí pasamos una función anónima
+      this.requestLoader.closeRequestLoader();
     }).catch((error) => {
       console.error('Error al enviar el correo:', error);
-      this.requestLoader.closeRequestLoader(); // Cierra el loader en caso de error también
+      this.requestLoader.closeRequestLoader();
     });
     this.form.reset;
   }

@@ -115,16 +115,50 @@ export class NewMessageComponent implements OnInit{
   //   }
   // }
 
-
   selectImage(event: any): void {
-    this.selectedFile = event.target.files[0];
-    if (this.selectedFile) {
-      const reader = new FileReader();
-      reader.onload = e => this.imageSrc = reader.result;
-      reader.readAsDataURL(this.selectedFile);
+    const file = event.target.files[0];
+    if (file) {
+      this.convertToWebP(file).then((webpFile) => {
+        this.selectedFile = webpFile;
+        const reader = new FileReader();
+        reader.onload = e => this.imageSrc = reader.result;
+        reader.readAsDataURL(webpFile);
+        this.fileImageName = webpFile.name;
+      }).catch(error => console.log('Error converting to WebP:', error));
     }
   }
 
+  convertToWebP(file: File): Promise<File> {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = (event) => {
+        const img = new Image();
+        img.src = event.target?.result as string;
+        img.onload = () => {
+          const canvas = document.createElement('canvas');
+          const ctx = canvas.getContext('2d');
+          if (!ctx) {
+            reject('Canvas context is not available');
+            return;
+          }
+          canvas.width = img.width;
+          canvas.height = img.height;
+          ctx.drawImage(img, 0, 0);
+          canvas.toBlob((blob) => {
+            if (blob) {
+              const webpFile = new File([blob], file.name.replace(/\.[^.]+$/, '.webp'), { type: 'image/webp' });
+              resolve(webpFile);
+            } else {
+              reject('Failed to create WebP file');
+            }
+          }, 'image/webp', 0.75);
+        };
+      };
+      reader.onerror = (error) => reject(error);
+    });
+  }
+  
   // selectImage(event: any): void {
   //   const input = event.target as HTMLInputElement;
   //   if (input.files && input.files.length > 0) {
