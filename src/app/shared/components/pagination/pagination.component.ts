@@ -46,11 +46,6 @@ export class PaginationComponent implements OnInit{
 
   }
 
-  /**
-    TODO: HAY UN PROBLEMA CON LA CARGA DE LOS PROYECTOS al iniciar la aplicacion,
-    AL PARECER SE EEJCUTA DOS VECES EN OINIT DEBIDO QUE EL SERVICIO DE LA ANTERIOR PAGINA SE ENCUENTRA ABIERTO
-    Y COMO NO SE HA CERRADO LA APLICACION INTUYE QUE HAY DOS SERVICIOS.
-   **/
   public ngOnInit(): void {
     this.getFirstDocument(this.path);
     this.initialPagination(this.path);
@@ -167,6 +162,8 @@ export class PaginationComponent implements OnInit{
       console.log("totalDocs: ",this.totalDocs);
       console.log("numberDocsShow: ",this.numberDocsShow);
 
+      this.windowArray = [];
+      
       this.totalPages = Math.ceil(this.totalDocs/this.numberDocsShow);
 
       console.log("totalPages: ",this.totalPages);
