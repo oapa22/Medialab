@@ -1,6 +1,6 @@
 import { Podcast } from './../../../shared/interfaces/podcast.interface';
 import { Component, OnInit } from '@angular/core';
-import { FirestoreService } from './../../../radio/services/firebase.service';
+import { FirestoreService } from './../../../medialab/services/firebase.service';
 import { Timestamp } from '@angular/fire/firestore';
 import { DatePipe } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';

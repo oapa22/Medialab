@@ -1,0 +1,207 @@
+
+<div class="w-full">
+
+  <div class="relative">
+    <!-- Carusel de imagenes -->
+    <medialab-carousel [mediaElement]="this.mediaElementCarousel" [intervalTime]="5000"></medialab-carousel>
+
+    <!-- Seccion Mensajes -->
+    <div class="absolute w-[0] h-[0] lg:w-[24%] lg:h-[28%] top-[48%] right-[5%] transform -translate-y-1/2">
+      <medialab-message-board></medialab-message-board>
+    </div>
+
+    <!-- Informacion sobre Medialab UTPL -->
+    <medialab-section-about-us></medialab-section-about-us>
+  </div>
+
+
+  <!-- Seccion Nuestra programacion -->
+  <div class="w-full bg-blue-utpl bg-[url('/medialab_media/line_opacity.svg'),url('/medialab_media/line_yellow.svg')] bg-no-repeat bg-[top,bottom]">
+      <div class="w-[90%] mx-auto py-10">
+
+        <!-- Seccion Programacion -->
+        <div class="">
+          <div class="flex items-end ml-16 mb-10 text-white text-2xl">
+            <h2>
+              <p><strong>{{'Nuestra' | uppercase}}</strong></p>
+              {{'Programación' | uppercase}}
+            </h2>
+
+            <svg width="150px" height="50px" viewBox="0 0 150 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- Flecha apuntando a la derecha -->
+              <path d="M10 25H140M140 25L130 15M140 25L130 35" stroke="#FCBD31" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+
+          <!-- Progrmaacion de genially -->
+          <medialab-section-schedule></medialab-section-schedule>
+        </div>
+
+        <!-- Seccion proyectos (los proyectos fueron renombrados a noticias) -->
+        <div class="my-10">
+          <div class="flex items-end justify-end mr-16 mb-10 text-white text-2xl">
+            <!-- Flecha apuntando a la izquierda -->
+            <svg width="150px" height="50px" viewBox="0 0 150 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M140 25H10M10 25L20 15M10 25L20 35" stroke="#FCBD31" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+
+            <h2>
+              <p><strong>{{'Noticias' | uppercase}}</strong></p>
+            </h2>
+          </div>
+
+          <!-- Los 3 Proyectos mas recientes -->
+          <div [ngSwitch]="projects.length">
+            <div *ngSwitchCase="1">
+              <!-- Contenido para 1 proyecto -->
+              <div class="max-w-[90%] md:max-w-[80%] lg:max-w-[30%] mx-auto grid gap-10 grid-cols-1 text-xs md:text-base place-items-center items-center">
+                <div class="w-full h-[250px] md:h-[400px] flex flex-col" *ngIf="projects.length > 0">
+                  <div class="w-full h-[54%]">
+                    <img class="w-full h-full rounded-md object-cover" [src]="projects[0].photo_url" alt="">
+                  </div>
+                  <div class="h-full p-2 flex flex-col justify-between">
+                    <p class="font-semibold text-yellow-utpl"> {{date[0]}} </p>
+                    <p class="font-bold text-white">{{projects[0].title | truncate:105}}</p>
+                    <p class="text-white">{{projects[0].summary | truncate:120}}</p>
+                    <div>
+                      <a class="w-[40%] px-5 py-1 mb-3 text-center text-xs font-semibold rounded-3xl bg-white border-2 border-white hover:bg-blue-utpl hover:text-yellow-utpl shadow-lg"
+                        routerLink='../noticias/contenido/{{projects[0].id}}'>
+                        Leer más..
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div *ngSwitchCase="2">
+              <!-- Contenido para 2 proyectos -->
+              <div class="max-w-[90%] md:max-w-[80%] lg:max-w-[60%] mx-auto grid gap-10 grid-cols-1 sm:grid-cols-2 text-xs md:text-base place-items-center items-center">
+                <div class="w-full h-[250px] md:h-[400px] flex flex-col" *ngIf="projects.length > 0">
+                  <div class="w-full h-[54%]">
+                    <img class="w-full h-full rounded-md object-cover" [src]="projects[0].photo_url" alt="">
+                  </div>
+                  <div class="h-full p-2 flex flex-col justify-between">
+                    <p class="font-semibold text-yellow-utpl"> {{date[0]}} </p>
+                    <p class="font-bold text-white">{{projects[0].title | truncate:105}}</p>
+                    <p class="text-white">{{projects[0].summary | truncate:120}}</p>
+                    <div>
+                      <a class="w-[40%] px-5 py-1 mb-3 text-center text-xs font-semibold rounded-3xl bg-white border-2 border-white hover:bg-blue-utpl hover:text-yellow-utpl shadow-lg"
+                        routerLink='../noticias/contenido/{{projects[0].id}}'>
+                        Leer más..
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              
+                <div class="w-full h-[250px] md:h-[400px] flex flex-col" *ngIf="projects.length > 1">
+                  <div class="w-full h-[54%]">
+                    <img class="w-full h-full rounded-md object-cover" [src]="projects[1].photo_url" alt="">
+                  </div>
+                  <div class="h-full p-2 flex flex-col justify-between">
+                    <p class="font-semibold text-yellow-utpl"> {{date[1]}} </p>
+                    <p class="font-bold text-white">{{projects[1].title | truncate:105}}</p>
+                    <p class="text-white">{{projects[1].summary | truncate:120}}</p>
+                    <div>
+                      <a class="w-[40%] px-5 py-1 mb-3 text-center text-xs font-semibold rounded-3xl bg-white border-2 border-white hover:bg-blue-utpl hover:text-yellow-utpl shadow-lg"
+                        routerLink='../noticias/contenido/{{projects[1].id}}'>
+                        Leer más..
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div *ngSwitchDefault>
+              <!-- Contenido para 3 o más proyectos -->
+              <div class="w-full gap-10 mb-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 justify-items-center">
+                <div class="w-full h-[250px] md:h-[400px] flex flex-col" *ngIf="projects.length > 0">
+                  <div class="w-full h-[54%]">
+                    <img class="w-full h-full rounded-md object-cover" [src]="projects[0].photo_url" alt="">
+                  </div>
+                  <div class="h-full p-2 flex flex-col justify-between">
+                    <p class="font-semibold text-yellow-utpl">{{ date[0] }}</p>
+                    <p class="font-bold text-white">{{ projects[0].title | truncate:105 }}</p>
+                    <p class="text-white">{{ projects[0].summary | truncate:120 }}</p>
+                    <div>
+                      <a class="w-[40%] px-5 py-1 mb-3 text-center text-xs font-semibold rounded-3xl bg-white border-2 border-white hover:bg-blue-utpl hover:text-yellow-utpl shadow-lg"
+                        routerLink='../noticias/contenido/{{projects[0].id}}'>
+                        Leer más..
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              
+                <div class="w-full h-[250px] md:h-[400px] flex flex-col" *ngIf="projects.length > 1">
+                  <div class="w-full h-[54%]">
+                    <img class="w-full h-full rounded-md object-cover" [src]="projects[1].photo_url" alt="">
+                  </div>
+                  <div class="h-full p-2 flex flex-col justify-between">
+                    <p class="font-semibold text-yellow-utpl">{{ date[1] }}</p>
+                    <p class="font-bold text-white">{{ projects[1].title | truncate:105 }}</p>
+                    <p class="text-white">{{ projects[1].summary | truncate:120 }}</p>
+                    <div>
+                      <a class="w-[40%] px-5 py-1 mb-3 text-center text-xs font-semibold rounded-3xl bg-white border-2 border-white hover:bg-blue-utpl hover:text-yellow-utpl shadow-lg"
+                        routerLink='../noticias/contenido/{{projects[1].id}}'>
+                        Leer más..
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              
+                <div class="w-full h-[250px] md:h-[400px] flex flex-col" *ngIf="projects.length > 2">
+                  <div class="w-full h-[54%]">
+                    <img class="w-full h-full rounded-md object-cover" [src]="projects[2].photo_url" alt="">
+                  </div>
+                  <div class="h-full p-2 flex flex-col justify-between">
+                    <p class="font-semibold text-yellow-utpl">{{ date[2] }}</p>
+                    <p class="font-bold text-white">{{ projects[2].title | truncate:105 }}</p>
+                    <p class="text-white">{{ projects[2].summary | truncate:120 }}</p>
+                    <div>
+                      <a class="w-[40%] px-5 py-1 mb-3 text-center text-xs font-semibold rounded-3xl bg-white border-2 border-white hover:bg-blue-utpl hover:text-yellow-utpl shadow-lg"
+                        routerLink='../noticias/contenido/{{projects[2].id}}'>
+                        Leer más..
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+  </div>
+
+  <!-- Seccion Podcast -->
+  <div class="w-full">
+    <div class="flex items-end ml-24 mb-10 text-blue-utpl text-2xl">
+      <h2>
+        <p><strong>{{'Podcasts' | uppercase}}</strong></p>
+      </h2>
+
+      <svg width="150px" height="50px" viewBox="0 0 150 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Flecha apuntando a la derecha -->
+        <path d="M10 25H140M140 25L130 15M140 25L130 35" stroke="#FCBD31" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-y-3" *ngIf="this.podcasts.length > 0">
+      <div *ngFor="let podcast of podcasts" class="mx-5">
+        <shared-card-podcast [podcast]="podcast"></shared-card-podcast>
+      </div>
+    </div>
+
+    <!-- <raido-carousel-spotify></raido-carousel-spotify> -->
+
+  </div>
+
+
+
+</div>
+
+
+
+
+
+

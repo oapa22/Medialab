@@ -5,7 +5,7 @@ import { Error404PageComponent } from './shared/pages/error-404-page/error-404-p
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () => import('./radio/radio.module').then(m => m.RadioModule)
+    loadChildren: () => import('./medialab/medialab.module').then(m => m.MedialabModule)
   },
   {
     path: '404',

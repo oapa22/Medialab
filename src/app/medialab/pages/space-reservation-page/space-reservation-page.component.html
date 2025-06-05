@@ -1,0 +1,144 @@
+<div class="flex gap-6">
+
+  <!-- Calendario -->
+  <div class="flex-1">
+    <div class="calendar-container">
+
+      <!-- Encabezado con navegación, mes actual y selector de vista -->
+      <div class="flex justify-between items-center my-4 flex-wrap gap-4">
+
+        <!-- Botones de navegación -->
+        <div class="flex gap-2">
+          <button
+            class="bg-[#132540] text-white font-bold py-2 px-4 rounded"
+            (click)="previous()">
+            &lt; Anterior
+          </button>
+          <button
+            class="bg-[#132540] text-white font-bold py-2 px-4 rounded"
+            (click)="today()">
+            Hoy
+          </button>
+          <button
+            class="bg-[#132540] text-white font-bold py-2 px-4 rounded"
+            (click)="next()">
+            Siguiente &gt;
+          </button>
+        </div>
+
+        <!-- Mes actual -->
+        <div class="text-lg font-semibold text-[#132540] text-center flex-1">
+          {{ viewDate | date: 'MMMM yyyy' }}
+        </div>
+
+        <!-- Selector de vista -->
+        <div class="flex gap-2">
+          <button
+            (click)="setView(CalendarView.Month)"
+            [ngClass]="{
+              'bg-[#0d1e33] text-white': view === CalendarView.Month,
+              'bg-[#F3F3F3] text-[#132540]': view !== CalendarView.Month,
+              'rounded-l-lg': true,
+              'border border-[#132540]': true,
+              'font-bold py-2 px-4': true,
+              'transition duration-300 ease-in-out': true,
+              'focus:outline-none': true
+            }"
+          >
+            Mes
+          </button>
+
+          <button
+            (click)="setView(CalendarView.Week)"
+            [ngClass]="{
+              'bg-[#0d1e33] text-white': view === CalendarView.Week,
+              'bg-[#F3F3F3] text-[#132540]': view !== CalendarView.Week,
+              'border border-[#132540]': true,
+              'font-bold py-2 px-4': true,
+              'transition duration-300 ease-in-out': true,
+              'focus:outline-none': true
+            }"
+          >
+            Semana
+          </button>
+
+          <button
+            (click)="setView(CalendarView.Day)"
+            [ngClass]="{
+              'bg-[#0d1e33] text-white': view === CalendarView.Day,
+              'bg-[#F3F3F3] text-[#132540]': view !== CalendarView.Day,
+              'rounded-r-lg': true,
+              'border border-[#132540]': true,
+              'font-bold py-2 px-4': true,
+              'transition duration-300 ease-in-out': true,
+              'focus:outline-none': true
+            }"
+          >
+            Día
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Vista dinámica del calendario -->
+      <ng-container [ngSwitch]="view">
+        <!-- Vista mensual -->
+        <mwl-calendar-month-view
+        *ngSwitchCase="CalendarView.Month"
+        [viewDate]="viewDate"
+        [events]="events"
+        (dayClicked)="dayClicked($event.day.date)"
+
+        >
+        </mwl-calendar-month-view>
+
+        <!-- Vista semanal -->
+        <mwl-calendar-week-view
+        *ngSwitchCase="CalendarView.Week"
+        [viewDate]="viewDate"
+        [events]="events"
+        [dayStartHour]="7"
+        [dayEndHour]="21"
+        (hourSegmentClicked)="dayClicked($event.date)"
+        >
+        </mwl-calendar-week-view>
+
+        <!-- Vista diaria -->
+        <mwl-calendar-day-view
+        *ngSwitchCase="CalendarView.Day"
+        [viewDate]="viewDate"
+        [events]="events"
+        [dayStartHour]="7"
+        [dayEndHour]="21"
+        (hourSegmentClicked)="dayClicked($event.date)"
+        >
+        </mwl-calendar-day-view>
+
+      </ng-container>
+
+    </div>
+  </div>
+
+  <!-- Panel derecho para reserva y eventos del día -->
+  <div *ngIf="selectedDate" class="w-64 p-4 border border-gray-300 rounded bg-white shadow-md">
+    <h3 class="font-bold mb-4">
+      {{ selectedDate | date:'fullDate' }}
+    </h3>
+
+    <button
+      class="w-full bg-blue-600 text-white py-2 rounded mb-4 hover:bg-blue-700 transition"
+      (click)="reserveSpace()"
+    >
+      Reservar espacio
+    </button>
+
+    <h4 class="font-semibold mb-2">Espacios reservados</h4>
+    <ul class="list-disc list-inside max-h-64 overflow-auto">
+      <li *ngFor="let event of eventsForSelectedDate">
+        {{ event.title }} ({{ event.start | date:'shortTime' }} - {{ event.end | date:'shortTime' }})
+      </li>
+      <li *ngIf="eventsForSelectedDate.length === 0">No hay reservas</li>
+    </ul>
+  </div>
+
+</div>

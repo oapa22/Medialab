@@ -5,7 +5,7 @@ import { Podcast } from '../../../shared/interfaces/podcast.interface';
 import { Project } from '../../../shared/interfaces/project.interface';
 import { CounterDocService } from '../../../shared/services/counter-doc.service';
 import { QueryDocumentSnapshot, QuerySnapshot } from '@angular/fire/compat/firestore';
-import { FirestoreService } from '../../../radio/services/firebase.service';
+import { FirestoreService } from '../../../medialab/services/firebase.service';
 
 @Component({
     selector: 'shared-pagination',

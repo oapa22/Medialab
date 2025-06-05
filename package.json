@@ -1,5 +1,5 @@
 {
-  "name": "radio-utpl",
+  "name": "medialab",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -23,7 +23,11 @@
     "@angular/router": "^19.0.1",
     "@emailjs/browser": "^4.4.1",
     "@tinymce/tinymce-angular": "^8.0.1",
+    "angular-calendar": "^0.31.1",
+    "angularx-flatpickr": "^8.1.0",
+    "date-fns": "^4.1.0",
     "firebase": "^10.13.0",
+    "flatpickr": "^4.6.13",
     "rxjs": "~7.8.0",
     "tinymce": "^7.3.0",
     "tslib": "^2.3.0",

@@ -2,7 +2,7 @@ import { CanMatchFn, GuardResult, MaybeAsync, Router } from '@angular/router';
 import { AuthServiceService } from '../services/auth.service';
 import { inject } from '@angular/core';
 import { map, of, switchMap } from 'rxjs';
-import { FirestoreService } from '../../radio/services/firebase.service';
+import { FirestoreService } from '../../medialab/services/firebase.service';
 import { User } from '../../shared/interfaces/user.interface';
 
 export const adminGuard: CanMatchFn = (route, segments): MaybeAsync<GuardResult> => {

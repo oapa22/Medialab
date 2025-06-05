@@ -1,4 +1,4 @@
-import { RadioModule } from './../radio/radio.module';
+import { MedialabModule } from '../medialab/medialab.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Error404PageComponent } from './pages/error-404-page/error-404-page.component';

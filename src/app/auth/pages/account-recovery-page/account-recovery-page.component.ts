@@ -1,6 +1,6 @@
 import { AuthServiceService } from './../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
-import { FirestoreService } from './../../../radio/services/firebase.service';
+import { FirestoreService } from './../../../medialab/services/firebase.service';
 import { User } from '../../../shared/interfaces/user.interface';
 import { Router } from '@angular/router';
 import { Timestamp } from '@angular/fire/firestore';

@@ -4,7 +4,7 @@ import { User } from '../../../shared/interfaces/user.interface';
 import { Podcast } from '../../../shared/interfaces/podcast.interface';
 import { Project } from '../../../shared/interfaces/project.interface';
 import { Message } from '../../../shared/interfaces/message.interface';
-import { FirestoreService } from '../../../radio/services/firebase.service';
+import { FirestoreService } from '../../../medialab/services/firebase.service';
 
 @Component({
     selector: 'admin-list-template',

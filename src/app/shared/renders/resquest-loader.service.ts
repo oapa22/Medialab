@@ -61,7 +61,7 @@ export class ResquestLoaderRenderService {
     this.renderer.addClass(borderSpinner, 'rounded-full');
 
     const tailSpinner = this.renderer.createElement('img');
-    tailSpinner.src = 'radio_media/tail-spin.svg';
+    tailSpinner.src = 'medialab_media/tail-spin.svg';
     this.renderer.addClass(tailSpinner, 'w-full');
     this.renderer.addClass(tailSpinner, 'h-full');
     this.renderer.addClass(tailSpinner, 'absolute');
@@ -107,7 +107,7 @@ export class ResquestLoaderRenderService {
 
   public loaderRequestLoader(overlay:HTMLElement, containerSpinner:HTMLElement, tailSpinner:HTMLElement, buttonSucces:HTMLElement) {
     const checkSVG = this.renderer.createElement('img');
-    checkSVG.src = 'radio_media/check-svgrepo-com.svg';
+    checkSVG.src = 'medialab_media/check-svgrepo-com.svg';
     this.renderer.addClass(checkSVG, 'absolute');
     this.renderer.addClass(checkSVG, 'animate-fadeIn');
 
@@ -115,7 +115,7 @@ export class ResquestLoaderRenderService {
 
   public closeRequestLoader() {
     const checkSVG = this.renderer.createElement('img');
-    checkSVG.src = 'radio_media/check-svgrepo-com.svg';
+    checkSVG.src = 'medialab_media/check-svgrepo-com.svg';
     this.renderer.addClass(checkSVG, 'absolute');
     this.renderer.addClass(checkSVG, 'animate-fadeIn');
   

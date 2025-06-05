@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FirestoreService } from './../../../radio/services/firebase.service';
+import { FirestoreService } from './../../../medialab/services/firebase.service';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { Project } from './../../../shared/interfaces/project.interface';
 import { Timestamp } from '@angular/fire/firestore';

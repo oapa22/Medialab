@@ -4,7 +4,7 @@ import { filter, switchMap  } from 'rxjs';
 
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../../../shared/components/confirm-dialog/confirm-dialog.component';
-import { FirestoreService } from '../../../radio/services/firebase.service';
+import { FirestoreService } from '../../../medialab/services/firebase.service';
 import { Timestamp } from 'firebase/firestore';
 import { ResquestLoaderRenderService } from '../../../shared/renders/resquest-loader.service';
 import { ConfirmDialogService } from '../../../shared/renders/confirm-dialog.service';
