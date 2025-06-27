@@ -1,18 +1,21 @@
-<div class="w-full h-[162px] flex animate-fadeIn" [ngStyle]="{display: hasLoaded? '' : 'none'}">
-
+<div class="w-full h-[162px] flex animate-fadeIn" [ngStyle]="{ display: hasLoaded ? '' : 'none' }">
   <!-- Imagen -->
-  <img class="w-[20%] object-cover border-2 border-[#C4C4C4] rounded-l-lg" (load)="this.onLoad()" [src]=this.imageSrc alt="">
+  <img
+    class="w-[20%] object-cover border-2 border-[#C4C4C4] rounded-l-lg"
+    (load)="this.onLoad()"
+    [src]="this.imageSrc"
+    alt=""
+  />
 
-  <!-- Seccion Contenido -->
+  <!-- Sección Contenido -->
   <div class="w-[70%] flex flex-col p-4 justify-between border-y-2 border-[#C4C4C4]">
     <p class="text-title-2 font-semibold">{{ this.title }}</p>
     <p class="text-content-1">{{ this.date }}</p>
-    <p class="text-content-2">{{ this.summary}}</p>
+    <p class="text-content-2">{{ this.summary }}</p>
   </div>
 
-  <!-- Secction Botones -->
-  <div class="w-[15%] sm:w-[10%] grid grid-rows-2 bg-[#D9D9D980] border-2  border-[#C4C4C4]">
-
+  <!-- Sección Botones -->
+  <div class="w-[15%] sm:w-[10%] grid grid-rows-2 bg-[#D9D9D980] border-2 border-[#C4C4C4]">
     <div class="flex flex-col justify-center items-center text-content-3 border-b-2 border-[#C4C4C4]">
       <ng-container *ngIf="this.userTemplate">
         <p class="p-1">Administrador</p>
@@ -21,41 +24,78 @@
           class="w-6 h-6 text-blue-600 bg-gray-100 border-gray-300 rounded-f focus:ring-blue-500"
           [checked]="isAdmin"
           (change)="toggleAdmin($event)"
-        >
+        />
       </ng-container>
 
-      <button
-        (click)="this.naviagetToNewElement()"
-        class="p-2 flex justify-center items-center rounded-2xl hover:bg-slate-400"
-        *ngIf="!this.userTemplate"
-      >
+      <ng-container *ngIf="!this.userTemplate && this.paramRoute !== 'reservacion'">
+        <button
+          (click)="this.navigateToNewElement()"
+          class="p-2 flex justify-center items-center rounded-2xl hover:bg-slate-400"
+        >
           <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path fill-rule="evenodd" clip-rule="evenodd" d="M13.5714 4.35645H5.21429C4.2292 4.35645 3.28445 4.74777 2.58789 5.44433C1.89133 6.1409 1.5 7.08564 1.5 8.07073V24.785C1.5 25.7701 1.89133 26.7148 2.58789 27.4114C3.28445 28.108 4.2292 28.4993 5.21429 28.4993H23.7857C24.7708 28.4993 25.7155 28.108 26.4121 27.4114C27.1087 26.7148 27.5 25.7701 27.5 24.785V16.4279" fill="#D9D9D9" fill-opacity="0.05"/>
-            <path d="M13.5714 4.35645H5.21429C4.2292 4.35645 3.28445 4.74777 2.58789 5.44433C1.89133 6.1409 1.5 7.08564 1.5 8.07073V24.785C1.5 25.7701 1.89133 26.7148 2.58789 27.4114C3.28445 28.108 4.2292 28.4993 5.21429 28.4993H23.7857C24.7708 28.4993 25.7155 28.108 26.4121 27.4114C27.1087 26.7148 27.5 25.7701 27.5 24.785V16.4279" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-            <path fill-rule="evenodd" clip-rule="evenodd" d="M27.4992 2.4383C27.9942 2.95023 28.2684 3.63619 28.2625 4.34833C28.2566 5.06048 27.9711 5.74179 27.4676 6.24544L14.4992 19.2139L8.92773 21.071L10.7849 15.4996L23.7607 2.41415C24.2169 1.95447 24.8273 1.68028 25.474 1.6446C26.1206 1.60893 26.7575 1.8143 27.2614 2.22101L27.4992 2.4383ZM23.7849 6.21387L25.5547 8.07101L23.7849 6.21387Z" fill="#D9D9D9" fill-opacity="0.05"/>
-            <path d="M23.7849 6.21387L25.5547 8.07101M27.4992 2.4383C27.9942 2.95023 28.2684 3.63619 28.2625 4.34833C28.2566 5.06048 27.9711 5.74179 27.4676 6.24544L14.4992 19.2139L8.92773 21.071L10.7849 15.4996L23.7607 2.41415C24.2169 1.95447 24.8273 1.68028 25.474 1.6446C26.1206 1.60893 26.7575 1.8143 27.2614 2.22101L27.4992 2.4383Z" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            <path
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M13.5714 4.35645H5.21429C4.2292 4.35645 3.28445 4.74777 2.58789 5.44433C1.89133 6.1409 1.5 7.08564 1.5 8.07073V24.785C1.5 25.7701 1.89133 26.7148 2.58789 27.4114C3.28445 28.108 4.2292 28.4993 5.21429 28.4993H23.7857C24.7708 28.4993 25.7155 28.108 26.4121 27.4114C27.1087 26.7148 27.5 25.7701 27.5 24.785V16.4279"
+              fill="#D9D9D9"
+              fill-opacity="0.05"
+            />
+            <path
+              d="M13.5714 4.35645H5.21429C4.2292 4.35645 3.28445 4.74777 2.58789 5.44433C1.89133 6.1409 1.5 7.08564 1.5 8.07073V24.785C1.5 25.7701 1.89133 26.7148 2.58789 27.4114C3.28445 28.108 4.2292 28.4993 5.21429 28.4993H23.7857C24.7708 28.4993 25.7155 28.108 26.4121 27.4114C27.1087 26.7148 27.5 25.7701 27.5 24.785V16.4279"
+              stroke="black"
+              stroke-width="3"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M27.4992 2.4383C27.9942 2.95023 28.2684 3.63619 28.2625 4.34833C28.2566 5.06048 27.9711 5.74179 27.4676 6.24544L14.4992 19.2139L8.92773 21.071L10.7849 15.4996L23.7607 2.41415C24.2169 1.95447 24.8273 1.68028 25.474 1.6446C26.1206 1.60893 26.7575 1.8143 27.2614 2.22101L27.4992 2.4383ZM23.7849 6.21387L25.5547 8.07101L23.7849 6.21387Z"
+              fill="#D9D9D9"
+              fill-opacity="0.05"
+            />
+            <path
+              d="M23.7849 6.21387L25.5547 8.07101M27.4992 2.4383C27.9942 2.95023 28.2684 3.63619 28.2625 4.34833C28.2566 5.06048 27.9711 5.74179 27.4676 6.24544L14.4992 19.2139L8.92773 21.071L10.7849 15.4996L23.7607 2.41415C24.2169 1.95447 24.8273 1.68028 25.474 1.6446C26.1206 1.60893 26.7575 1.8143 27.2614 2.22101L27.4992 2.4383Z"
+              stroke="black"
+              stroke-width="3"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
           </svg>
-      </button>
-    </div>
+        </button>
+      </ng-container>
 
+      <ng-container *ngIf="this.paramRoute === 'reservacion'">
+        <button
+          (click)="this.acceptReservation()"
+          class="p-2 flex justify-center items-center rounded-2xl hover:bg-green-200"
+          title="Aceptar reservación"
+        >
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M20 6L9 17L4 12" stroke="green" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </ng-container>
+    </div>
 
     <div class="flex justify-center items-center">
       <button
         (click)="this.onDeleteElement()"
-        class="p-2 flex justify-center items-center rounded-2xl hover:bg-slate-400"
+        class="p-2 flex justify-center items-center rounded-2xl hover:bg-red-200"
+        title="Rechazar reservación"
       >
-          <svg width="29" height="31" viewBox="0 0 29 31" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M5.95898 30.875C5.0194 30.875 4.21535 30.5407 3.54682 29.8722C2.87829 29.2037 2.54346 28.3991 2.54232 27.4583V5.25H0.833984V1.83333H9.37565V0.125H19.6257V1.83333H28.1673V5.25H26.459V27.4583C26.459 28.3979 26.1247 29.2025 25.4562 29.8722C24.7877 30.5419 23.983 30.8761 23.0423 30.875H5.95898ZM23.0423 5.25H5.95898V27.4583H23.0423V5.25ZM9.37565 24.0417H12.7923V8.66667H9.37565V24.0417ZM16.209 24.0417H19.6257V8.66667H16.209V24.0417Z" fill="black"/>
-          </svg>
+        <svg width="29" height="31" viewBox="0 0 29 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M5.95898 30.875C5.0194 30.875 4.21535 30.5407 3.54682 29.8722C2.87829 29.2037 2.54346 28.3991 2.54232 27.4583V5.25H0.833984V1.83333H9.37565V0.125H19.6257V1.83333H28.1673V5.25H26.459V27.4583C26.459 28.3979 26.1247 29.2025 25.4562 29.8722C24.7877 30.5419 23.983 30.8761 23.0423 30.875H5.95898ZM23.0423 5.25H5.95898V27.4583H23.0423V5.25ZM9.37565 24.0417H12.7923V8.66667H9.37565V24.0417ZM16.209 24.0417H19.6257V8.66667H16.209V24.0417Z"
+            fill="red"
+          />
+        </svg>
       </button>
     </div>
-
   </div>
-
 </div>
 
-
 <!-- Spinner empleado para la carga del elemento -->
-<div class=" w-full h-[200px] flex items-center justify-center" *ngIf="!hasLoaded">
-  <img src="medialab_media/loader.svg" alt="">
+<div class="w-full h-[200px] flex items-center justify-center" *ngIf="!hasLoaded">
+  <img src="medialab_media/loader.svg" alt="" />
 </div>

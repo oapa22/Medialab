@@ -8,8 +8,6 @@ import { ProjectsPageComponent } from './pages/projects-page/projects-page.compo
 import { SchedulePageComponent } from './pages/schedule-page/schedule-page.component';
 import { ProjectTemplateComponent } from './pages/project-template/project-template.component';
 
-
-import { HardwarePageComponent } from './pages/hardware-page/hardware-page.component';
 import { JobBoardPageComponent } from './pages/job-board-page/job-board-page.component';
 import { NewsPageComponent } from './pages/news-page/news-page.component';
 import { SpaceReservationPageComponent } from './pages/space-reservation-page/space-reservation-page.component';
@@ -22,7 +20,6 @@ const routes: Routes = [
       {path: 'inicio', component: HomePageComponent},
       {path: 'quienes-somos', component: AboutUsPageComponent},
       {path: 'bolsa-empleo', component: JobBoardPageComponent},
-      {path: 'equipos', component: HardwarePageComponent},
       {path: 'reserva-espacios', component: SpaceReservationPageComponent},
       {path: 'contacto', component: ContactPageComponent},
       {path: 'noticias', component: ProjectsPageComponent},

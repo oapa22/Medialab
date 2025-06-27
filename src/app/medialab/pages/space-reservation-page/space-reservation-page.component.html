@@ -84,35 +84,34 @@
       <ng-container [ngSwitch]="view">
         <!-- Vista mensual -->
         <mwl-calendar-month-view
-        *ngSwitchCase="CalendarView.Month"
-        [viewDate]="viewDate"
-        [events]="events"
-        (dayClicked)="dayClicked($event.day.date)"
-
-        >
-        </mwl-calendar-month-view>
+          *ngSwitchCase="CalendarView.Month"
+          [viewDate]="viewDate"
+          [events]="events"
+          (dayClicked)="dayClicked($event.day.date)"
+          (eventClicked)="viewEventDetails($event.event)"
+        ></mwl-calendar-month-view>
 
         <!-- Vista semanal -->
         <mwl-calendar-week-view
-        *ngSwitchCase="CalendarView.Week"
-        [viewDate]="viewDate"
-        [events]="events"
-        [dayStartHour]="7"
-        [dayEndHour]="21"
-        (hourSegmentClicked)="dayClicked($event.date)"
-        >
-        </mwl-calendar-week-view>
+          *ngSwitchCase="CalendarView.Week"
+          [viewDate]="viewDate"
+          [events]="events"
+          [dayStartHour]="7"
+          [dayEndHour]="21"
+          (hourSegmentClicked)="dayClicked($event.date)"
+          (eventClicked)="viewEventDetails($event.event)"
+        ></mwl-calendar-week-view>
 
         <!-- Vista diaria -->
         <mwl-calendar-day-view
-        *ngSwitchCase="CalendarView.Day"
-        [viewDate]="viewDate"
-        [events]="events"
-        [dayStartHour]="7"
-        [dayEndHour]="21"
-        (hourSegmentClicked)="dayClicked($event.date)"
-        >
-        </mwl-calendar-day-view>
+          *ngSwitchCase="CalendarView.Day"
+          [viewDate]="viewDate"
+          [events]="events"
+          [dayStartHour]="7"
+          [dayEndHour]="21"
+          (hourSegmentClicked)="dayClicked($event.date)"
+          (eventClicked)="viewEventDetails($event.event)"
+        ></mwl-calendar-day-view>
 
       </ng-container>
 
@@ -134,8 +133,21 @@
 
     <h4 class="font-semibold mb-2">Espacios reservados</h4>
     <ul class="list-disc list-inside max-h-64 overflow-auto">
-      <li *ngFor="let event of eventsForSelectedDate">
-        {{ event.title }} ({{ event.start | date:'shortTime' }} - {{ event.end | date:'shortTime' }})
+      <li *ngFor="let event of eventsForSelectedDate" class="mb-2">
+        <div class="flex items-center">
+          {{ event.title }} ({{ event.start | date:'shortTime' }} - {{ event.end | date:'shortTime' }})
+          <button
+            *ngIf="event.meta.status === 'Pendiente' && event.meta.userId === currentUserId"
+            class="ml-2 bg-red-600 text-white py-1 px-2 rounded hover:bg-red-700 transition"
+            (click)="cancelReservation(event.meta.id)"
+          >
+            Cancelar
+          </button>
+        </div>
+        <!-- Mostrar nombre del usuario -->
+        <div *ngIf="event.meta.userId" class="text-sm text-gray-600">
+          Reservado por: {{ event.meta.userName }}
+        </div>
       </li>
       <li *ngIf="eventsForSelectedDate.length === 0">No hay reservas</li>
     </ul>

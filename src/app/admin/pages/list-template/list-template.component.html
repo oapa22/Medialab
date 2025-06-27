@@ -92,3 +92,27 @@
     <shared-pagination path='user' [numberDocsShow]=4 (userEmitter)="this.getUsers($event)"></shared-pagination>
   </div>
 </div>
+
+<!-- Reservations -->
+<div *ngIf="this.valueLabel == 'reservacion'">
+  <div class="py-2" *ngFor="let reservation of this.reservations">
+    <admin-card-template
+      imageSrc="https://www.viacelere.com/wp-content/uploads/old-blog/2018/05/via-celere-sala-estudio-1280x720.jpg"
+      [title]="reservation.title + ' (' + reservation.room + ')'"
+      [date]="formatDate(reservation.start)"
+      [summary]="reservation.observations || 'Sin observaciones'"
+      [id]="reservation.id!"
+      paramRoute="reservacion"
+      path="reservations"
+    ></admin-card-template>
+  </div>
+
+  <!-- Paginación -->
+  <!-- <div class="mt-5">
+    <shared-pagination
+      path="reservations"
+      [numberDocsShow]="4"
+      (reservationEmitter)="this.getReservations($event)"
+    ></shared-pagination>
+  </div> -->
+</div>

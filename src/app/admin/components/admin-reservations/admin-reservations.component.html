@@ -1,0 +1,33 @@
+<div class="p-6">
+  <h2 class="text-2xl font-bold mb-4 text-[#132540]">Reservaciones Pendientes</h2>
+
+  <div *ngIf="pendingReservations.length === 0" class="text-gray-500">
+    No hay reservaciones pendientes.
+  </div>
+
+  <div class="grid gap-4">
+    <div *ngFor="let reservation of pendingReservations" class="p-4 border border-gray-300 rounded bg-white shadow-md">
+      <h3 class="font-semibold text-lg">{{ reservation.title }} ({{ reservation.room }})</h3>
+      <p><strong>Tipo de evento:</strong> {{ reservation.eventType }}</p>
+      <p><strong>Fecha y hora:</strong> {{ reservation.start.toDate() | date:'medium' }} - {{ reservation.end.toDate() | date:'shortTime' }}</p>
+      <p><strong>Participantes:</strong> {{ reservation.participants }}</p>
+      <!-- <p><strong>Asistentes:</strong> {{ reservation.attendees.join(', ') }}</p> -->
+      <p><strong>Observaciones:</strong> {{ reservation.observations || 'Ninguna' }}</p>
+      <p><strong>Estado:</strong> {{ reservation.status }}</p>
+      <div class="mt-4 flex gap-2">
+        <button
+          class="bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700 transition"
+          (click)="acceptReservation(reservation)"
+        >
+          Aceptar
+        </button>
+        <button
+          class="bg-red-600 text-white py-2 px-4 rounded hover:bg-red-700 transition"
+          (click)="rejectReservation(reservation)"
+        >
+          Rechazar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

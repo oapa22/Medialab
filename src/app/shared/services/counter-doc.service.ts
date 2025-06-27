@@ -17,7 +17,7 @@ export class CounterDocService implements OnInit{
     throw new Error('Method not implemented.');
   }
 
-  public async incrementCounter(field: 'message' | 'podcast'|'project'|'user', incrementBy: number = 1):Promise<boolean>{
+  public async incrementCounter(field: 'message' | 'podcast'|'project'|'user'|'reservations', incrementBy: number = 1):Promise<boolean>{
     let increment:boolean = false;
     const docRef  = this.firestore.collection(this.collectionName).doc(this.documentDname);
 
@@ -43,7 +43,7 @@ export class CounterDocService implements OnInit{
     }
   }
 
-  public async decrementCounter(field: 'message' | 'podcast'|'project'|'user', incrementBy: number = 1):Promise<boolean>{
+  public async decrementCounter(field: 'message' | 'podcast'|'project'|'user'|'reservations', incrementBy: number = 1):Promise<boolean>{
     let decrement:boolean = false;
     const docRef  = this.firestore.collection(this.collectionName).doc(this.documentDname);
 

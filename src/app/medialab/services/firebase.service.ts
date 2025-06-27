@@ -26,6 +26,12 @@ export class FirestoreService {
         return collection.valueChanges();
     }
 
+    // Nuevo método para obtener colección con filtro
+    getFilteredCollection<tipo>(path: string, field: string, value: any) {
+      const collection = this.firestore.collection<tipo>(path, (ref) => ref.where(field, '==', value));
+      return collection.valueChanges({ idField: 'id' });
+    }
+
     //crear un documento
     createDoc(data: any, path: string, id: string){
         const collection = this.firestore.collection(path);
@@ -44,7 +50,9 @@ export class FirestoreService {
       return this.firestore.collection(collection).doc<T>(docId).valueChanges();
     }
 
-
+    getUserById(userId: string): Observable<{ names: string } | undefined> {
+      return this.getDocUS<{ names: string }>('user', userId);
+    }
 
 
     // ======================================================================================================

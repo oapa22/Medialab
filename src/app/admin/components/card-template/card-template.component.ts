@@ -10,6 +10,7 @@ import { ResquestLoaderRenderService } from '../../../shared/renders/resquest-lo
 import { ConfirmDialogService } from '../../../shared/renders/confirm-dialog.service';
 import { User } from '../../../shared/interfaces/user.interface';
 import { CounterDocService } from '../../../shared/services/counter-doc.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
     selector: 'admin-card-template',
@@ -24,8 +25,8 @@ export class CardTemplateComponent implements OnInit{
   @Input() public date:string = '';
   @Input() public summary:string = '';
   @Input() public id:string = '';
-  @Input() public paramRoute:'podcast' | 'noticia' | 'mensaje' | 'usuario' |'' = '';
-  @Input() public path!: 'user'|'podcast'|'message'|'project';
+  @Input() public paramRoute:'podcast' | 'noticia' | 'mensaje' | 'usuario' | 'reservacion' |'' = '';
+  @Input() public path!: 'user'|'podcast'|'message'|'project'|'reservations';
 
   public route:string = '';
   public hasLoaded:boolean = false;
@@ -37,7 +38,8 @@ export class CardTemplateComponent implements OnInit{
     private firestore: FirestoreService,
     private dialog:MatDialog,
     private confirmDialog:ConfirmDialogService,
-    private requestLoader:ResquestLoaderRenderService
+    private requestLoader:ResquestLoaderRenderService,
+    private snackBar: MatSnackBar
   ){}
 
   ngOnInit(): void {
@@ -49,7 +51,7 @@ export class CardTemplateComponent implements OnInit{
     });
   }
 
-  public naviagetToNewElement():void{
+  public navigateToNewElement():void{
     this.router.navigate(['admin/editar-'+this.route]);
   }
 
@@ -116,7 +118,31 @@ export class CardTemplateComponent implements OnInit{
     });
   }
 
-  
+  public acceptReservation(): void {
+    if (this.paramRoute === 'reservacion' && this.id) {
+      const title: string = '¿Desea aceptar esta reservación?';
+      const description: string = 'La reservación será marcada como Aceptada y aparecerá en el calendario.';
+
+      this.confirmDialog.openConfirmDialog(title, description).then((confirmed) => {
+        if (confirmed) {
+          this.requestLoader.initRequestLoader(
+            'RESERVACIÓN ACEPTADA',
+            'Espere un momento mientras se actualizan los datos.'
+          );
+
+          this.firestore.updateDoc('reservations', this.id, { status: 'Aceptada' }).then(() => {
+            this.requestLoader.closeRequestLoader();
+            this.snackBar.open('Reservación aceptada con éxito', 'Cerrar', { duration: 3000 });
+          }).catch((error) => {
+            console.error('Error al aceptar la reservación:', error);
+            this.requestLoader.closeRequestLoader();
+            this.snackBar.open('Error al aceptar la reservación', 'Cerrar', { duration: 3000 });
+          });
+        }
+      });
+    }
+  }
+
   public toggleAdmin(event: any): void {
     const isAdmin = event.target.checked; // Capturamos el estado del checkbox.
 

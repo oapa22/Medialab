@@ -24,15 +24,15 @@ export class LayoutPageComponent implements OnInit{
       this.valueLabel = 'mensaje';
     } else if(this.router.url.includes('lista-usuarios')){
       this.valueLabel = 'usuario';
+    } else if(this.router.url.includes('lista-reservaciones')){
+      this.valueLabel = 'reservacion';
     } else {
       this.router.navigate(['/admin/']);
     }
   }
 
-
-
   //Funcion para cambiar el valor del contenido del boton.
-  public updateButtonLabel(valueLabel:'podcast'|'noticia'|'mensaje'|'usuario'):void{
+  public updateButtonLabel(valueLabel:'podcast'|'noticia'|'mensaje'|'usuario'|'reservacion'):void{
     this.valueLabel = valueLabel;
   }
 

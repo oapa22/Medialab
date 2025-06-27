@@ -12,6 +12,7 @@ import { NewMessageComponent } from './pages/new-message/new-message.component';
 import { ListTemplateComponent } from './pages/list-template/list-template.component';
 import { CardTemplateComponent } from './components/card-template/card-template.component';
 import { SharedModule } from "../shared/shared.module";
+import { AdminReservationsComponent } from './components/admin-reservations/admin-reservations.component';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { SharedModule } from "../shared/shared.module";
     NewMessageComponent,
     ListTemplateComponent,
     CardTemplateComponent,
+    AdminReservationsComponent,
 
   ],
   imports: [

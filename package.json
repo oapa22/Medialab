@@ -10,6 +10,7 @@
   },
   "private": true,
   "dependencies": {
+    "@angular-material-components/datetime-picker": "^16.0.1",
     "@angular/animations": "^19.0.1",
     "@angular/cdk": "^18.2.0",
     "@angular/common": "^19.0.1",
@@ -18,6 +19,7 @@
     "@angular/fire": "^18.0.1",
     "@angular/forms": "^19.0.1",
     "@angular/material": "^18.2.0",
+    "@angular/material-moment-adapter": "^20.0.2",
     "@angular/platform-browser": "^19.0.1",
     "@angular/platform-browser-dynamic": "^19.0.1",
     "@angular/router": "^19.0.1",
@@ -28,6 +30,7 @@
     "date-fns": "^4.1.0",
     "firebase": "^10.13.0",
     "flatpickr": "^4.6.13",
+    "moment": "^2.30.1",
     "rxjs": "~7.8.0",
     "tinymce": "^7.3.0",
     "tslib": "^2.3.0",

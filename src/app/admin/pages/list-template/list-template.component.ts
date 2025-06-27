@@ -4,7 +4,9 @@ import { User } from '../../../shared/interfaces/user.interface';
 import { Podcast } from '../../../shared/interfaces/podcast.interface';
 import { Project } from '../../../shared/interfaces/project.interface';
 import { Message } from '../../../shared/interfaces/message.interface';
+import { Reservation } from '../../../shared/interfaces/reservation.intertafe';
 import { FirestoreService } from '../../../medialab/services/firebase.service';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'admin-list-template',
@@ -17,8 +19,10 @@ export class ListTemplateComponent implements OnInit{
   public projects: Project[] = [];
   public messages: Message[] = [];
   public users: User[] = [];
+  public reservations: Reservation[] = []; // Nuevo
   public param: string = '';
   public valueLabel: string = '';
+  private subscription: Subscription = new Subscription();
 
   constructor(
     private router: Router,
@@ -47,6 +51,9 @@ export class ListTemplateComponent implements OnInit{
         //   this.users = res;
         // });
         this.valueLabel = 'usuario';
+      } else if (this.router.url.includes('lista-reservaciones')) {
+        this.valueLabel = 'reservacion';
+        this.loadPendingReservations(); // Cargar reservaciones pendientes
       } else {
         this.router.navigate(['admin/']);
 
@@ -76,6 +83,20 @@ export class ListTemplateComponent implements OnInit{
 
   public getUsers(users:User[]):void{
     this.users = users;
+  }
+
+  public getReservations(reservations: Reservation[]): void {
+    this.reservations = reservations;
+  }
+
+  loadPendingReservations(): void {
+    this.subscription.add(
+      this.fireStoreService
+        .getFilteredCollection<Reservation>('reservations', 'status', 'Pendiente')
+        .subscribe((res) => {
+          this.reservations = res;
+        })
+    );
   }
 
   public formatDate(timestamp: any): string {

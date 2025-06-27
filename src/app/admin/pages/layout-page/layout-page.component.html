@@ -5,11 +5,17 @@
 
     <!-- Opciones de enlace -->
     <div class="w-[80%] h-[50px] md:h-[70px] mx-auto px-[10%] flex justify-between items-center font-bold text-title-2 text-white rounded-full bg-gradient-to-r from-[#F29F05] to-[#FAB300]">
-        <a href="" routerLink="./lista-podcasts"
+        <!-- <a href="" routerLink="./lista-podcasts"
           (click)="updateButtonLabel('podcast')"
           class="hover:text-blue-utpl"
           [ngClass]="{'text-blue-utpl':valueLabel == 'podcast'}"
-        >PODCASTS</a>
+        >PODCASTS</a> -->
+
+        <a href="" routerLink="./lista-reservaciones"
+          (click)="updateButtonLabel('reservacion')"
+          class="hover:text-blue-utpl"
+          [ngClass]="{'text-blue-utpl':valueLabel == 'reservacion'}"
+        >RESERVACIONES</a>
 
         <span class="block w-[1px] h-[80%] bg-[#104D73]"></span>
 
@@ -19,13 +25,13 @@
           [ngClass]="{'text-blue-utpl':valueLabel == 'noticia'}"
         >NOTICIAS</a>
 
-        <span class="block w-[1px] h-[80%] bg-[#104D73]"></span>
+        <!-- <span class="block w-[1px] h-[80%] bg-[#104D73]"></span> -->
 
-        <a href="" routerLink="./lista-mensajes"
+        <!-- <a href="" routerLink="./lista-mensajes"
           (click)="updateButtonLabel('mensaje')"
           class="hover:text-blue-utpl"
           [ngClass]="{'text-blue-utpl':valueLabel == 'mensaje'}"
-        >MENSAJES</a>
+        >MENSAJES</a> -->
 
         <span class="block w-[1px] h-[80%] bg-[#104D73]"></span>
 
@@ -34,6 +40,7 @@
           class="hover:text-blue-utpl"
           [ngClass]="{'text-blue-utpl':valueLabel == 'usuario'}"
         >USUARIOS</a>
+
     </div>
 
     <!-- Boton para crear -->

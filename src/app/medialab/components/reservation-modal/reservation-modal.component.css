@@ -1,0 +1,9 @@
+:host {
+  display: block;
+  max-width: 500px;
+  z-index: 1000;
+}
+
+mat-dialog-content {
+  padding: 20px;
+}

@@ -15,6 +15,7 @@ const routes: Routes = [
     component: LayoutPageComponent,
     children: [
       {path: 'lista-podcasts', component: ListTemplateComponent},
+      {path: 'lista-reservaciones', component: ListTemplateComponent},
       {path: 'lista-noticias', component: ListTemplateComponent},
       {path: 'lista-mensajes', component: ListTemplateComponent},
       {path: 'lista-usuarios', component: ListTemplateComponent},
@@ -24,7 +25,7 @@ const routes: Routes = [
       {path: 'editar-podcast/:id', component: NewPodcastComponent},
       {path: 'nuevo-mensaje', component: NewMessageComponent},
       {path: 'editar-mensaje/:id', component: NewMessageComponent},
-      {path: '**', redirectTo: 'lista-podcasts'}
+      {path: '**', redirectTo: 'lista-usuarios'}
     ]
   }
 ];
