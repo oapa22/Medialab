@@ -136,6 +136,7 @@
       <li *ngFor="let event of eventsForSelectedDate" class="mb-2">
         <div class="flex items-center">
           {{ event.title }} ({{ event.start | date:'shortTime' }} - {{ event.end | date:'shortTime' }})
+          <!-- Botón para cancelar (si es el dueño) -->
           <button
             *ngIf="event.meta.status === 'Pendiente' && event.meta.userId === currentUserId"
             class="ml-2 bg-red-600 text-white py-1 px-2 rounded hover:bg-red-700 transition"
@@ -144,9 +145,31 @@
             Cancelar
           </button>
         </div>
+        
+        <div *ngIf="event.meta.createdAt" class="text-xs text-gray-500">
+          Creado el: {{ event.meta.createdAt.toDate() | date:'full' }}
+        </div>
+
         <!-- Mostrar nombre del usuario -->
         <div *ngIf="event.meta.userId" class="text-sm text-gray-600">
           Reservado por: {{ event.meta.userName }}
+        </div>
+        
+        <!-- Botones de admin: Aceptar / Rechazar -->
+        <div
+          *ngIf="user.isAdmin && event.meta.status === 'Pendiente'"
+          class="flex gap-2 mt-1"
+        >
+          <button
+            class="bg-green-600 text-white py-1 px-2 rounded hover:bg-green-700 transition"
+            (click)="acceptReservation(event.meta.id)">
+            Aceptar
+          </button>
+          <button
+            class="bg-yellow-600 text-white py-1 px-2 rounded hover:bg-yellow-700 transition"
+            (click)="rejectReservation(event.meta.id)">
+            Rechazar
+          </button>
         </div>
       </li>
       <li *ngIf="eventsForSelectedDate.length === 0">No hay reservas</li>

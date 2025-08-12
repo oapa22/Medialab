@@ -27,37 +27,37 @@
           (mouseenter)="toggleDropdown(item.titleRoute, true)"
           (mouseleave)="toggleDropdown(item.titleRoute, false)">
     
-          <!-- "Publicaciones" como span, y se marca solo en noticias o proyectos -->
-          <span *ngIf="item.titleRoute === 'Publicaciones'"
-            [ngClass]="{'text-yellow-utpl': currentRoute.includes('/noticias') || currentRoute.includes('/proyectos')}"
+          <!-- "Proyectos" como span, y se marca solo en noticias o proyectos -->
+          <span *ngIf="item.titleRoute === 'Proyectos'"
+            [ngClass]="{'text-yellow-utpl': currentRoute.includes('/comunicacion') || currentRoute.includes('/laboratorio')}"
             class="p-1 cursor-default">
             {{ item.titleRoute | uppercase }}
           </span>
     
           <!-- Los demás elementos siguen como enlaces normales -->
-          <a *ngIf="item.titleRoute !== 'Publicaciones'"
+          <a *ngIf="item.titleRoute !== 'Proyectos'"
             [ngClass]="{'text-yellow-utpl': currentRoute.includes(item.route.replace('.', ''))}"
             class="p-1 hover:text-yellow-utpl transition duration-300 ease-in-out"
             [routerLink]=item.route>
             {{ item.titleRoute | uppercase }}
           </a>
     
-          <!-- Menú desplegable solo para 'Publicaciones' -->
-          <div *ngIf="showDropdown === 'Publicaciones' && item.titleRoute === 'Publicaciones'"
+          <!-- Menú desplegable solo para 'Proyectos' -->
+          <div *ngIf="showDropdown === 'Proyectos' && item.titleRoute === 'Proyectos'"
             class="absolute left-0 mt-1 w-48 bg-white text-black shadow-lg rounded-lg z-50"
             (mouseenter)="keepDropdownOpen()" 
-            (mouseleave)="toggleDropdown('Publicaciones', false)">
+            (mouseleave)="toggleDropdown('Proyectos', false)">
             
             <a class="block px-4 py-2 hover:bg-gray-200" 
               routerLink="./noticias"
               (click)="closeDropdownAfterNavigation()">
-              Noticias
+              Carrera de Comunicación
             </a>
             
             <a class="block px-4 py-2 hover:bg-gray-200" 
-              routerLink="./proyectos"
+              routerLink="./laboratorio"
               (click)="closeDropdownAfterNavigation()">
-              Proyectos
+              Laboratorio
             </a>
           </div>
         

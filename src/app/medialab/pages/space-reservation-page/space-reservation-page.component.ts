@@ -12,6 +12,9 @@ import { User } from '../../../shared/interfaces/user.interface';
 import { AuthServiceService } from '../../../auth/services/auth.service';
 import { switchMap } from 'rxjs/operators';
 import { ResquestLoaderRenderService } from '../../../shared/renders/resquest-loader.service';
+import emailjs, { type EmailJSResponseStatus } from '@emailjs/browser';
+import { ActivatedRoute, Router } from '@angular/router';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-space-reservation-page',
@@ -45,8 +48,8 @@ export class SpaceReservationPageComponent implements OnInit, OnDestroy {
     private dialog: MatDialog,
     private auth: AuthServiceService,
     private firestoreService: FirestoreService,
-    private requestLoader:ResquestLoaderRenderService
-    
+    private requestLoader:ResquestLoaderRenderService,
+    private router:Router
   ) {}
 
   ngOnInit(): void {
@@ -84,68 +87,71 @@ export class SpaceReservationPageComponent implements OnInit, OnDestroy {
     });
   }
 
-loadReservations(): void {
-  if (!this.currentUserId) return;
+  loadReservations(): void {
+    if (!this.currentUserId) return;
 
-  const acceptedReservations$ = this.firestoreService
-    .getFilteredCollection<Reservation>('reservations', 'status', 'Aceptada')
-    .pipe(
-      map((reservations) =>
-        reservations.map((res) => ({
-          id: res.id,
-          title: `${res.title} (${res.room})`,
-          start: res.start.toDate(),
-          end: res.end.toDate(),
-          color: {
-            primary: res.eventType === 'Presencial' ? '#ad2121' : '#1e90ff',
-            secondary: '#FAE3E3',
-          },
-          meta: { ...res, userName: '' }, // Inicializar nombre
-        }))
-      )
-    );
-
-  const pendingReservations$ = this.firestoreService
-    .getFilteredCollection<Reservation>('reservations', 'status', 'Pendiente')
-    .pipe(
-      map((reservations) =>
-        reservations
-          .filter((res) => res.userId === this.currentUserId)
-          .map((res) => ({
+    const acceptedReservations$ = this.firestoreService
+      .getFilteredCollection<Reservation>('reservations', 'status', 'Aceptada')
+      .pipe(
+        map((reservations) =>
+          reservations.map((res) => ({
             id: res.id,
-            title: `${res.title} (${res.room}) - Pendiente`,
+            title: `${res.title} (${res.room})`,
             start: res.start.toDate(),
             end: res.end.toDate(),
             color: {
-              primary: '#ff9900',
-              secondary: '#FFF3E0',
+              primary: res.eventType === 'Presencial' ? '#ad2121' : '#1e90ff',
+              secondary: '#FAE3E3',
             },
-            meta: { ...res, userName: '' },
+            meta: { ...res, userName: '' }, // Inicializar nombre
           }))
         )
       );
 
-  this.subscription.add(
-    combineLatest([acceptedReservations$, pendingReservations$])
+    const pendingReservations$ = this.firestoreService
+      .getFilteredCollection<Reservation>('reservations', 'status', 'Pendiente')
       .pipe(
-        map(([accepted, pending]) => [...accepted, ...pending]),
-        switchMap((events) =>
-          combineLatest(
-            events.map((event) =>
-              this.firestoreService.getUserById(event.meta.userId).pipe(
-                map((user) => ({
-                  ...event,
-                  meta: { ...event.meta, userName: user?.names || 'Desconocido' },
-                }))
+        map((reservations) =>
+          reservations
+            // Mostrar todas si es admin, o solo las suyas si no
+            .filter((res) =>
+              this.user.isAdmin ? true : res.userId === this.currentUserId
+            )
+            .map((res) => ({
+              id: res.id,
+              title: `${res.title} (${res.room}) - Pendiente`,
+              start: res.start.toDate(),
+              end: res.end.toDate(),
+              color: {
+                primary: '#ff9900',
+                secondary: '#FFF3E0',
+              },
+              meta: { ...res, userName: '' },
+            }))
+        )
+      );
+
+    this.subscription.add(
+      combineLatest([acceptedReservations$, pendingReservations$])
+        .pipe(
+          map(([accepted, pending]) => [...accepted, ...pending]),
+          switchMap((events) =>
+            combineLatest(
+              events.map((event) =>
+                this.firestoreService.getUserById(event.meta.userId).pipe(
+                  map((user) => ({
+                    ...event,
+                    meta: { ...event.meta, userName: user?.names || 'Desconocido' },
+                  }))
+                )
               )
             )
           )
         )
-      )
-      .subscribe((events) => {
-        this.events = events;
-      })
-    );
+        .subscribe((events) => {
+          this.events = events;
+        })
+      );
   } 
 
   setView(view: CalendarView) {
@@ -205,6 +211,7 @@ loadReservations(): void {
           room: result.room,
           start: Timestamp.fromDate(result.start),
           end: Timestamp.fromDate(result.end),
+          createdAt: Timestamp.now(),
           participants: result.participants,
           observations: result.observations,
           status: 'Pendiente',
@@ -212,29 +219,90 @@ loadReservations(): void {
         };
         this.firestoreService
           .createDoc(reservationData, 'reservations', reservationId)
-          .then(() => console.log('Reserva guardada con éxito'))
+          .then(() => {
+            this.sendEmail(
+              this.user.names,
+              this.user.email,
+              'La petición de reserva ha sido creada correctamente',
+              `La petición de reserva \"${reservationData.title}\" creada el ${this.formatDateTime(reservationData.createdAt)} ha sido creada.`,
+            );
+          })
           .catch((error) => console.error('Error al guardar la reserva:', error));
       }
     });
   }
 
   cancelReservation(reservationId: string) {
+    this.firestoreService.getDocProject<Reservation>('reservations', reservationId).pipe(first()).subscribe(reservation => {
+      if (!reservation) return;
 
-    this.requestLoader.initRequestLoader(
-      'CANCELANDO RESERVA',
-      'Espere un momento mientras se elimina la reserva.'
-    );
+      this.requestLoader.initRequestLoader(
+        'CANCELANDO RESERVA',
+        'Espere un momento mientras se elimina la reserva.'
+      );
 
-    this.firestoreService
-      .deleteDoc('reservations', reservationId)
-      .then(() => {
-        this.requestLoader.closeRequestLoader();
-      })
-      .catch((error) => {
-        console.error('Error al cancelar la reserva:', error);
-        this.requestLoader.closeRequestLoader();
-      });
+      this.firestoreService
+        .deleteDoc('reservations', reservationId)
+        .then(() => {
+          this.sendEmail(
+            this.user.names,
+            this.user.email,
+            'La petición de reserva ha sido cancelada',
+            `La petición de reserva \"${reservation.title}\" creada el ${this.formatDateTime(reservation.createdAt)} ha sido cancelada.`,
+          );
+          this.requestLoader.closeRequestLoader();
+        });
+    });
   }
+
+  acceptReservation(reservationId: string): void {
+    this.firestoreService.getDocProject<Reservation>('reservations', reservationId).pipe(first()).subscribe(reservation => {
+      if (!reservation) return;
+
+      this.firestoreService.getDocProject<User>('user', reservation.userId).pipe(first()).subscribe(user => {
+        if (!user) return;
+
+        this.firestoreService
+          .updateDoc('reservations', reservationId, { status: 'Aceptada' })
+          .then(() => {
+            this.sendEmail(
+              user.names,
+              user.email,
+              'La petición de reserva ha sido aceptada',
+              `La petición de reserva \"${reservation.title}\" creada el ${this.formatDateTime(reservation.createdAt)} ha sido aceptada.`,
+            );
+          })
+          .catch((error) => {
+            console.error('Error al aceptar la reservación:', error);
+          });
+      });
+    });
+  }
+
+  rejectReservation(reservationId: string): void {
+    this.firestoreService.getDocProject<Reservation>('reservations', reservationId).pipe(first()).subscribe(reservation => {
+      if (!reservation) return;
+
+      this.firestoreService.getDocProject<User>('user', reservation.userId).pipe(first()).subscribe(user => {
+        if (!user) return;
+
+        this.firestoreService
+          .deleteDoc('reservations', reservationId)
+          .then(() => {
+            this.sendEmail(
+              user.names,
+              user.email,
+              'La petición de reserva ha sido rechazada',
+              `La petición de reserva \"${reservation.title}\" creada el ${this.formatDateTime(reservation.createdAt)} ha sido rechazada.`,
+            );
+          })
+          .catch((error) => {
+            console.error('Error al rechazar la reservación:', error);
+          });
+      });
+    });
+  }
+
 
   get eventsForSelectedDate(): CalendarEvent[] {
     if (!this.selectedDate) return [];
@@ -247,5 +315,25 @@ loadReservations(): void {
 
   viewEventDetails(event: CalendarEvent): void {
     console.log('Detalles del evento:', event.meta);
+  }
+
+  async sendEmail(from_name: string, from_correo: string, subject: string, message: string,){
+    emailjs.init('Mqngl8pxC4iJUJ4Cg');
+    let response = await emailjs.send("service_7sc2huw","template_jsgi3vw",{
+      from_name: from_name,
+      from_correo: from_correo,
+      subject: subject,
+      message: message,
+    }).catch((error) => {
+      console.error('Error al enviar el correo:', error);
+    });
+  }
+
+  private formatDateTime(timestamp: Timestamp): string {
+    const date = timestamp.toDate();
+    return new Intl.DateTimeFormat('es-EC', {
+      dateStyle: 'full',
+      timeStyle: 'short',
+    }).format(date);
   }
 }

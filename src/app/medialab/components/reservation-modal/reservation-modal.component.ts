@@ -13,9 +13,13 @@ import moment from 'moment';
 })
 export class ReservationModalComponent {
   reservationForm: FormGroup;
-  separatorKeysCodes: number[] = [ENTER, COMMA];
-  rooms = ['Sala A', 'Sala B'];
-  eventTypes = ['Presencial', 'Virtual'];
+  rooms = ['Set de TV', 'Sala de reuniones'];
+  eventTypes: string[] = [];
+  roomEventTypes: { [key: string]: string[] } = {
+    'Set de TV': ['Taller', 'Clase práctica', 'Clase experimental', 'Grabación entrevista', 'Sesión de fotos'],
+    'Sala de reuniones': ['Taller', 'Reunión de trabajo'],
+  };
+
 
   constructor(
     private fb: FormBuilder,
@@ -24,9 +28,8 @@ export class ReservationModalComponent {
   ) {
     this.reservationForm = this.fb.group({
       title: ['', [Validators.required]],
-      eventType: ['', [Validators.required]],
+      eventType: [{ value: '', disabled: true }, [Validators.required]],
       room: ['', [Validators.required]],
-      // emails: [[], [Validators.required]],
       startDate: [new Date(this.data.selectedDate), [Validators.required]],
       startTime: ['08:00', [Validators.pattern(/([0-1]?[0-9]|2[0-3]):[0-5][0-9]/)]],
       endDate: [new Date(this.data.selectedDate), [Validators.required]],
@@ -34,7 +37,22 @@ export class ReservationModalComponent {
       participants: ['', [Validators.required, Validators.min(1)]],
       observations: [''],
     });
+
+
+    this.reservationForm.get('room')?.valueChanges.subscribe((room) => {
+      if (room) {
+        this.eventTypes = this.roomEventTypes[room] || [];
+        this.reservationForm.get('eventType')?.enable();
+        this.reservationForm.get('eventType')?.setValue('');
+      } else {
+        this.eventTypes = [];
+        this.reservationForm.get('eventType')?.disable();
+        this.reservationForm.get('eventType')?.setValue('');
+      }
+    });
   }
+
+
 
   addEmail(event: MatChipInputEvent): void {
     const input = event.input;

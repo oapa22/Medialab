@@ -1,20 +1,31 @@
-<a>.</a>
-<br>
-<a>.</a>
-<br>
-<a>.</a>
-<br>
-<a>.</a>
-<br>
-<a>.</a>
-<br>
-<a>.</a>
-<br>
-<a>.</a>
-<br>
-<a>.</a>
-<br>
-<a>.</a>
-<br>
-<a>.</a>
-<br>
+<div class="w-full">
+
+    <article class="w-[80%] mx-auto grid grid-rows-1 md:grid-cols-2 space-x-3 lg:space-x-10 space-y-3 my-20 justify-between items-center">
+        <!-- Video -->
+        <div class="relative flex justify-center items-center w-full h-[300px] lg:h-[400px]">
+            <div class="col-span-1 select-none my-20">
+            <img
+                class="w-[100%] lg:w-[100%] mx-auto rounded-3xl shadow-md"
+                src="https://st.depositphotos.com/1637787/3303/i/450/depositphotos_33033091-stock-photo-waiting-for-interview.jpg"
+                alt="Image Empleo"
+            >
+            </div>
+        </div>
+
+        <!-- Informacion -->
+        <div class="w-full text-sm   text-wrap text-blue-utpl" >
+            <h1 class="right-0 text-2xl">
+            <p><strong>{{'Bienvenido' | uppercase}}</strong> </p>
+            </h1>
+
+            <p class="text-justify my-5">Esta es nuestra Bolsa de Empleo, donde las oportunidades se hacen realidad. Estamos buscando personas con talento como tú.</p>
+            <p class="text-justify my-5">Llena el siguiente formulario con tus datos personales y académicos para que podamos contactarte.</p>
+
+            <button class="px-5 py-2" (click)="openForm()">
+            <a class="px-5 py-2 bg-yellow-utpl font-semibold text-xs text-blue-utpl  rounded-3xl border-blue-utpl border-2 shadow-md hover:bg-blue-utpl hover:text-white">
+            {{ 'Llenar formulario' | uppercase}}</a>
+            </button>
+        </div>
+    </article>
+
+</div>

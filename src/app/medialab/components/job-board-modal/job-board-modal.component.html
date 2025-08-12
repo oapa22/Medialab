@@ -1,0 +1,152 @@
+<h2 mat-dialog-title>Formulario de Postulación</h2>
+<mat-dialog-content>
+  <form [formGroup]="applicationForm" class="flex flex-col gap-4">
+    <!-- Información del Postulante -->
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label>Nombres y Apellidos Completos</mat-label>
+      <input matInput formControlName="fullName" required />
+      <mat-error *ngIf="applicationForm.get('fullName')?.hasError('required')">
+        El nombre completo es obligatorio
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label>Número de Cédula</mat-label>
+      <input matInput type="number" formControlName="idNumber" required />
+      <mat-error *ngIf="applicationForm.get('idNumber')?.hasError('required')">
+        El número de cédula es obligatorio
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label>Fecha de Nacimiento</mat-label>
+      <input matInput [matDatepicker]="birthDatePicker" formControlName="birthDate" required />
+      <mat-datepicker-toggle matSuffix [for]="birthDatePicker"></mat-datepicker-toggle>
+      <mat-datepicker #birthDatePicker></mat-datepicker>
+      <mat-error *ngIf="applicationForm.get('birthDate')?.hasError('required')">
+        La fecha de nacimiento es obligatoria
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label>Ciudad de Residencia</mat-label>
+      <input matInput formControlName="city" required />
+      <mat-error *ngIf="applicationForm.get('city')?.hasError('required')">
+        La ciudad de residencia es obligatoria
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label>Número de Teléfono</mat-label>
+      <input matInput type="number" formControlName="phoneNumber" required />
+      <mat-error *ngIf="applicationForm.get('phoneNumber')?.hasError('required')">
+        El número de teléfono es obligatorio
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label>Correo Electrónico</mat-label>
+      <input matInput formControlName="email" required />
+      <mat-error *ngIf="applicationForm.get('email')?.hasError('required')">
+        El correo electrónico es obligatorio
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Formación Académica -->
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label>Nivel de Instrucción</mat-label>
+      <mat-select formControlName="educationLevel" required>
+        <mat-option value="grado">Grado</mat-option>
+        <mat-option value="posgrado">Posgrado</mat-option>
+      </mat-select>
+      <mat-error *ngIf="applicationForm.get('educationLevel')?.hasError('required')">
+        Elija su nivel de instrucción
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label>Carrera</mat-label>
+      <input matInput formControlName="career" required />
+      <mat-error *ngIf="applicationForm.get('career')?.hasError('required')">
+        La carrera es obligatoria
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label>Institución Educativa</mat-label>
+      <input matInput formControlName="institution" required />
+      <mat-error *ngIf="applicationForm.get('institution')?.hasError('required')">
+        La institución educativa es obligatoria
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label>Año de Finalización o último año cursado</mat-label>
+      <input matInput type="number" formControlName="graduationYear" required />
+      <mat-error *ngIf="applicationForm.get('graduationYear')?.hasError('required')">
+        El año de finalización es obligatorio
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Experiencia Laboral -->
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label>¿Tiene experiencia laboral?</mat-label>
+      <mat-select formControlName="hasWorkExperience" required>
+        <mat-option value="yes">Sí</mat-option>
+        <mat-option value="no">No</mat-option>
+      </mat-select>
+      <mat-error *ngIf="applicationForm.get('hasWorkExperience')?.hasError('required')">
+        Debes seleccionar si tienes experiencia laboral
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="w-full" *ngIf="applicationForm.get('hasWorkExperience')?.value === 'yes'">
+      <mat-label>Nombre de la última empresa o instititución en la que trabajó</mat-label>
+      <input matInput formControlName="lastCompany" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label>¿Ha trabajado en su área de formación?</mat-label>
+      <mat-select formControlName="workedInField" required>
+        <mat-option value="yes">Sí</mat-option>
+        <mat-option value="no">No</mat-option>
+      </mat-select>
+      <mat-error *ngIf="applicationForm.get('workedInField')?.hasError('required')">
+        Debes seleccionar si has trabajado en tu área de formación
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Perfil Profesional -->
+    <div class="w-full">
+    <label class="block font-medium mb-1">Habilidades y Fortalezas Profesionales</label>
+    <p class="text-sm text-gray-600 mb-2">
+        Por favor, describa brevemente sus habilidades técnicas y personales. 
+        Por ejemplo: manejo de herramientas digitales, trabajo en equipo, 
+        liderazgo, resolución de problemas, habilidades comunicativas, etc.
+    </p>
+    <mat-form-field appearance="fill" class="w-full">
+        <textarea matInput formControlName="professionalSkills" required></textarea>
+        <mat-error *ngIf="applicationForm.get('professionalSkills')?.hasError('required')">
+        Las habilidades profesionales son obligatorias
+        </mat-error>
+    </mat-form-field>
+    </div>
+
+    <!-- Adjuntar CV -->
+    <div>
+        <label class="block mb-1 font-medium">Adjunte su hoja de vida (CV) en formato PDF</label>
+        <input type="file" accept="application/pdf" formControlName="cvFile" (change)="onFileSelected($event)" />
+        <mat-error *ngIf="applicationForm.get('cvFile')?.hasError('required')">
+            Es obligatorio adjuntar su hoja de vida en PDF
+        </mat-error>
+    </div>
+
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-button (click)="onCancel()">Cancelar</button>
+  <button mat-raised-button color="primary" (click)="onSubmit()" [disabled]="!applicationForm.valid">
+    Enviar Postulación
+  </button>
+</mat-dialog-actions>

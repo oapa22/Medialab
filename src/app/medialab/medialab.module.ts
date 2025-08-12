@@ -44,6 +44,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
+import { JobBoardModalComponent } from './components/job-board-modal/job-board-modal.component';
 
 registerLocaleData(localeEs);
 
@@ -72,6 +73,7 @@ registerLocaleData(localeEs);
     JobBoardPageComponent,
     HardwarePageComponent,
     ReservationModalComponent,
+    JobBoardModalComponent,
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'es' }, 

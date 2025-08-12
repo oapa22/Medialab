@@ -14,7 +14,7 @@ export class LayoutPageComponent implements OnInit {
   public browserRoutes:BrowserRoute[] = [
     {titleRoute: 'Inicio', route: './inicio'},
     {titleRoute: '¿Quiénes Somos?', route: './quienes-somos'},
-    {titleRoute: 'Publicaciones', route: './publicaciones'},
+    {titleRoute: 'Proyectos', route: './Proyectos'},
     {titleRoute: 'Bolsa de Empleo', route: './bolsa-empleo'},
     {titleRoute: 'Reserva de Espacios', route: './reserva-espacios'},
     {titleRoute: 'Contactos', route: './contacto'},

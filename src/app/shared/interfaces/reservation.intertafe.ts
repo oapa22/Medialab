@@ -7,7 +7,7 @@ export interface Reservation {
   room: string;
   start: Timestamp;
   end: Timestamp;
-  // createdAt: Timestamp;
+  createdAt: Timestamp;
   participants: number;
   observations: string;
   status: string;

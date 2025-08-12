@@ -47,12 +47,9 @@ export class HomePageComponent implements OnInit{
   public recentProject3: Project | null = null;
 
   public mediaElementCarousel:MediaElement[] = [
-    {id: '01', title: 'En Radio UTPL, cada voz cuenta. ¡Sintoniza y sé parte de nuestra comunidad académica!', imgSrc: 'https://firebasestorage.googleapis.com/v0/b/radioutpl.appspot.com/o/carousel_home%2F1.webp?alt=media&token=aa054f9e-947a-42e5-b134-04a404bafc18'},
-    {id: '02', title: 'Desde el campus hasta tu hogar, Radio UTPL te conecta con la esencia de nuestra universidad', imgSrc: 'https://firebasestorage.googleapis.com/v0/b/radioutpl.appspot.com/o/carousel_home%2F2.webp?alt=media&token=e2bc0130-e4fc-4f98-9978-64ed7885826c'},
-    {id: '03', title: 'Aquí en Radio UTPL, celebramos el talento y las historias de nuestros estudiantes. ¡Tu voz es nuestra inspiración!', imgSrc: 'https://firebasestorage.googleapis.com/v0/b/radioutpl.appspot.com/o/carousel_home%2F3.webp?alt=media&token=bc29434f-2fc8-452c-a0a0-426124088a55'},
-    {id: '04', title: 'Con cada programa, fortalecemos los lazos entre la universidad y la comunidad. ¡Gracias por ser parte de Radio UTPL!', imgSrc: 'https://firebasestorage.googleapis.com/v0/b/radioutpl.appspot.com/o/carousel_home%2F4.webp?alt=media&token=6c42bfd7-e6a6-4378-a317-5249d492adbd'},
-    {id: '05', title: 'En Radio UTPL, la música y el conocimiento se entrelazan. ¡Súmate a nuestra programación y descubre lo que somos!', imgSrc: 'https://firebasestorage.googleapis.com/v0/b/radioutpl.appspot.com/o/carousel_home%2F5.webp?alt=media&token=204e32e4-e17b-438c-ba6c-31d3cc5c2604'},
-    {id: '06', title: 'Tu comunidad académica, tu música, tu radio. ¡Bienvenidos a Radio UTPL!', imgSrc: 'https://firebasestorage.googleapis.com/v0/b/radioutpl.appspot.com/o/carousel_home%2F6.webp?alt=media&token=3f438c0e-0226-49f7-9336-6afac2343833'}
+    {id: '01', title: 'MediaLab: creatividad, tecnología y narrativas que transforman realidades.', imgSrc: 'https://firebasestorage.googleapis.com/v0/b/radioutpl.appspot.com/o/carousel_home%2F1.webp?alt=media&token=aa054f9e-947a-42e5-b134-04a404bafc18'},
+    {id: '02', title: 'Innovamos, experimentamos y comunicamos desde lo digital y creativo.', imgSrc: 'https://firebasestorage.googleapis.com/v0/b/radioutpl.appspot.com/o/carousel_home%2F2.webp?alt=media&token=e2bc0130-e4fc-4f98-9978-64ed7885826c'},
+    {id: '03', title: 'Laboratorio de medios: ideas que conectan y crean futuro.. ¡Tu voz es nuestra inspiración!', imgSrc: 'https://firebasestorage.googleapis.com/v0/b/radioutpl.appspot.com/o/carousel_home%2F3.webp?alt=media&token=bc29434f-2fc8-452c-a0a0-426124088a55'},
   ];
 
   private unsubscribe$ = new Subject<void>();
