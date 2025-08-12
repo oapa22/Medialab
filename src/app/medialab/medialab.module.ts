@@ -12,7 +12,6 @@ import { MedialabRoutingModule } from './medialab-routing.module';
 import { LayoutPageComponent } from './pages/layout-page/layout-page.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { AboutUsPageComponent } from './pages/about-us-page/about-us-page.component';
-import { SchedulePageComponent } from './pages/schedule-page/schedule-page.component';
 import { ProjectsPageComponent } from './pages/projects-page/projects-page.component';
 import { ContactPageComponent } from './pages/contact-page/contact-page.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -53,7 +52,6 @@ registerLocaleData(localeEs);
     LayoutPageComponent,
     HomePageComponent,
     AboutUsPageComponent,
-    SchedulePageComponent,
     ProjectsPageComponent,
     ContactPageComponent,
     HeaderComponent,

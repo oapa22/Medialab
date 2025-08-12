@@ -7,8 +7,6 @@ import { EditorModule } from '@tinymce/tinymce-angular';
 import { AdminRoutingModule } from './admin-routing.module';
 import { LayoutPageComponent } from './pages/layout-page/layout-page.component';
 import { NewProjectComponent } from './pages/new-project/new-project.component';
-import { NewPodcastComponent } from './pages/new-podcast/new-podcast.component';
-import { NewMessageComponent } from './pages/new-message/new-message.component';
 import { ListTemplateComponent } from './pages/list-template/list-template.component';
 import { CardTemplateComponent } from './components/card-template/card-template.component';
 import { SharedModule } from "../shared/shared.module";
@@ -19,8 +17,6 @@ import { AdminReservationsComponent } from './components/admin-reservations/admi
   declarations: [
     LayoutPageComponent,
     NewProjectComponent,
-    NewPodcastComponent,
-    NewMessageComponent,
     ListTemplateComponent,
     CardTemplateComponent,
     AdminReservationsComponent,

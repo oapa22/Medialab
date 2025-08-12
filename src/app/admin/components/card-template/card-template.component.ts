@@ -25,8 +25,8 @@ export class CardTemplateComponent implements OnInit{
   @Input() public date:string = '';
   @Input() public summary:string = '';
   @Input() public id:string = '';
-  @Input() public paramRoute:'podcast' | 'noticia' | 'mensaje' | 'usuario' | 'reservacion' |'' = '';
-  @Input() public path!: 'user'|'podcast'|'message'|'project'|'reservations';
+  @Input() public paramRoute:'noticia' | 'usuario' | 'reservacion' |'' = '';
+  @Input() public path!: 'user'|'project'|'reservations';
 
   public route:string = '';
   public hasLoaded:boolean = false;
